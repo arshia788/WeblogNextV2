@@ -1,9 +1,24 @@
-import React from 'react'
+import Image from "next/image";
+import Link from "next/link";
 
 export default function MainSliderAds() {
   return (
-    <div className=' min-w-[250px] h-full bg-red-400'>
-        MainSliderAds
+    <div className=' min-w-[200px] h-[400px] flex flex-col items-end gap-4'>
+
+      {/* in relative baray halat fill hast ke mikhay be image bedi */}
+
+      <Link href={'/'} className="w-[200px] h-[200px] relative ">
+        <Image
+        fill className="object-cover rounded-md border-2 border-blue-500" alt="ads"
+        src={'/images/ads/150_modern_furniture_social_media_post_template.jpg'}/>
+      </Link>
+
+      <Link href={'/'} className="w-[200px] h-[200px] relative ">
+        <Image
+        fill className="object-cover rounded-md border-2 border-blue-500" alt="ads"
+        src={'/images/ads/370_digital_marketing_media_post_template.jpg'}/>
+      </Link>
+
     </div>
   )
 }

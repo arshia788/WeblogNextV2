@@ -13,7 +13,7 @@ export default function MainSlider() {
         </div>
 
 
-        <div className="flex justify-between items-center gap-4 bg-green-700">
+        <div className="flex justify-between items-center gap-4">
             <SliderComp />
             <MainSliderAds />
         </div>
