@@ -29,14 +29,11 @@ export default function HotNews() {
 
         let item= activeNews.value;
 
-        // yani gofti agar on item akhari bod bia bokonesh az aval 
         if(item === newslist.length-1){
             setActiveNews(newslist[0])
         }
-        // agar na bia yeki + bokon. 
         else{
             setActiveNews(newslist[item + 1])
-
         }
 
     },4000)
@@ -44,7 +41,7 @@ export default function HotNews() {
     return (
         <div>
             <div className="flex items-center justify-start gap-1">
-                <span className="font-[vazirbold]">داغ ترین ها:</span>
+                <span className="font-[vazirbold] text-zinc-600 text-[1px]">داغ ترین ها:</span>
 
                 <Link href={`/posts/${activeNews.link}`} className="text-base sm:text-sm">
                     {activeNews.title}

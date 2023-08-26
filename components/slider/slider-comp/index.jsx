@@ -3,7 +3,7 @@
 import SliderImage from "../main-slider/slider-image";
 import Sliderbtn from "../button";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function SliderComp() {
 
@@ -25,7 +25,7 @@ export default function SliderComp() {
             title: 'لورم ایپسونعت چاپ ',
             value: 2,
             link: '/posts/post2',
-            src: '/images/posts/tablet1.jpg'
+            src: '/images/posts/tablet1.jpg',
         }
         ,
         {

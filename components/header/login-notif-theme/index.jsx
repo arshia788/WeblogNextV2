@@ -9,11 +9,10 @@ export default function LogInNotifTheme() {
 
       {/* dark ngiht */}
 
-      {/* in relative shod ta on on circle biad absolute beshe biad ro in .*/}
         <div className='relative flex justify-center items-center gap-1 border-2 border-blue-500 w-[54px] h-[28px] bg-white rounded-full'>
           <span className='w-4 h-4'><FiMoon /></span>
           <span className='w-4 h-4'><BsSun /></span>
-          <span className='w-6 h-6 bg-blue-500 rounded-full absolute top-0 right-0'></span>
+          <span className='w-[26px] h-[26px] bg-blue-500 rounded-full absolute -top-[1px] -right-[1px]'></span>
         </div>
 
         {/* notif */}
