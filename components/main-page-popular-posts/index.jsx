@@ -42,11 +42,11 @@ export default function MainPagePopularPosts() {
         },
         
         
-    ]
+    ];
 
 
     return (
-        <section className="p-4 bg-zinc-200 rounded-lg flex flex-col gap-6">
+        <section className="p-4 bg-zinc-100 rounded-lg flex flex-col gap-6">
 
 
             <header className="flex justify-between items-center w-full">

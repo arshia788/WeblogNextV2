@@ -20,9 +20,7 @@ export default function BlogBigBox({ data }) {
                     <h3 className="line-clamp-1">{data.title}</h3>
                 </Link>
 
-                <p className="text-zinc-600  line-clamp-2 text-base sm:text-sm">{data.short_desc}</p>
-
-                
+                <p className="text-zinc-600  line-clamp-2 text-base sm:text-sm  leading-10 ">{data.short_desc}</p>
 
             </div>
 
@@ -38,7 +36,7 @@ export default function BlogBigBox({ data }) {
 
                     </div>
 
-                </div>
+            </div>
 
         </article>
     )
