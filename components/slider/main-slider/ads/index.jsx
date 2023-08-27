@@ -1,4 +1,4 @@
-import AdsBox from "@/components/ads-box";
+import AdsBox from "@/components/boxes/ads-box";
 
 export default function MainSliderAds() {
   return (
