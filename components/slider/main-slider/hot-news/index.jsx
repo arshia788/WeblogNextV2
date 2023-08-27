@@ -27,7 +27,7 @@ export default function HotNews() {
 
     setTimeout(()=>{
 
-        let item= activeNews.value;
+        let item = activeNews.value;
 
         if(item === newslist.length-1){
             setActiveNews(newslist[0])
@@ -41,6 +41,7 @@ export default function HotNews() {
     return (
         <div>
             <div className="flex items-center justify-start gap-1">
+
                 <span className="font-[vazirbold] text-zinc-600 text-[1px]">داغ ترین ها:</span>
 
                 <Link href={`/posts/${activeNews.link}`} className="text-base sm:text-sm">
