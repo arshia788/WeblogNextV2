@@ -40,8 +40,6 @@ export default function MainPagePopularPosts() {
             view_number:120,
             slug:'laptop1',
         },
-        
-        
     ];
 
 

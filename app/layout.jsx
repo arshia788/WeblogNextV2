@@ -1,5 +1,6 @@
 import './globals.css'
-import Header from '@/components/header'
+import Header from '@/components/header';
+import Footer from '@/components/footer';
 
 
 export const metadata = {
@@ -14,8 +15,10 @@ export default function RootLayout({ children }) {
       <body className='flex flex-col gap-12'> 
   
         <Header /> 
+        
         <div className='container mx-auto '>
           {children}
+          <Footer />
         </div>
       </body>
 

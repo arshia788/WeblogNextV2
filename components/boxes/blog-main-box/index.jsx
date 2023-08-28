@@ -18,6 +18,7 @@ export default function BlogMainBox({ data }) {
             </div>
 
             <div className="flex flex-col gap-4 p-[.5rem]">
+
                 <Link href={data.slug} className="line-clamp-2 h-12">
                     <h3>{data.title}</h3>
                 </Link>
@@ -40,6 +41,7 @@ export default function BlogMainBox({ data }) {
                     </Link>
                 </div>
             </div>
+
         </article>
     )
 }
