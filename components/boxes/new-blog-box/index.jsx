@@ -7,7 +7,7 @@ import { BiLike } from 'react-icons/bi';
 export default function NewBlogBox({ data }) {
     return (
 
-        <article className="w-full h-[16.5rem] bg-white shadow-[0px_10px_10px_rgba(0,0,0,0.25)] rounded-lg transition-all duration-500 hover:shadow-[0px_10px_5px_rgba(0,0,0,0.35)] p-3">
+        <article className="w-full h-[16.5rem] bg-white shadow-[0px_0px_10px_rgba(0,0,0,0.25)] rounded-lg transition-all duration-500 hover:shadow-[0px_10px_5px_rgba(0,0,0,0.35)] flex items-center p-3">
 
             <div className='flex justify-start items-start gap-4'>
 

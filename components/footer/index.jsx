@@ -4,7 +4,6 @@ import GOToTOp from './go-to-top';
 
 export default function Footer() {
 
-
     return (
         <footer className='bg-zinc-200 p-4 rounded-lg flex justify-between items-center gap-2 mb-12 py-8 '>
 
@@ -24,6 +23,7 @@ export default function Footer() {
             <p>تمامی حقوق مادی و معنوی این سایت متعلق به مرن فا (mernfa.ir) می باشد و هرگونه کپی برداری، غیرقانونی محسوب خواهد شد.</p>
 
           <GOToTOp />
+
         </footer>
     )
 }
