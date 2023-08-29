@@ -7,10 +7,10 @@ import {BsFillBookmarkFill} from 'react-icons/bs';
 
 export default function PostMeta({data}) {
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 w-[280px] min-w-[280px]'>
 
-        <div className='flex '>
-            <div className='flex justify-center items-center gap-4'>
+        <div className='flex justify-between items-center gap-4 text-base sm:text-sm'>
+            <div className='flex justify-center items-center '>
                 <span>مطالعه:</span>
                 <span>{data.study_time} دقیقه</span>
             </div>
@@ -21,10 +21,10 @@ export default function PostMeta({data}) {
         </div>
 
         <div className='flex justify-between items-center gap-2'>
-            <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BiLogoTelegram /></Link>
-            <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BsTwitter /></Link>
-            <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BsLink45Deg /></Link>
-            <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BsFillBookmarkFill /></Link>
+            <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BiLogoTelegram className='w-6 h-6 text-zinc-600 transition-all duration-300 hover:bg-blue-500'/></Link>
+            <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BsTwitter className='w-6 h-6 text-zinc-600 transition-all duration-300 hover:bg-blue-500'/></Link>
+            <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BsLink45Deg className='w-7 h-7 text-zinc-600 transition-all duration-300 hover:bg-blue-500'/></Link>
+            <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BsFillBookmarkFill className='w-[22px] h-[22px] text-zinc-600 transition-all duration-300 hover:bg-blue-500'/></Link>
         </div>
     </div>
   )
