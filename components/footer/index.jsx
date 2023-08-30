@@ -9,13 +9,13 @@ export default function Footer() {
 
             <ul className='flex justify-start items-center gap-6'>
                 <li>
-                    <Link href={'/'}  className='transition-all duration-500 hover:text-blue-500'>درباره ما</Link>
+                    <Link href={'/about-us'}  className='transition-all duration-500 hover:text-blue-500'>درباره ما</Link>
                 </li>
                 <li>
-                    <Link href={'/'} className='transition-all duration-500 hover:text-blue-500'> تماس با ما</Link>
+                    <Link href={'/contact-us'} className='transition-all duration-500 hover:text-blue-500'> تماس با ما</Link>
                 </li>
                 <li>
-                    <Link href={'/'} className='transition-all duration-500 hover:text-blue-500'> جستجو</Link>
+                    <Link href={'/search'} className='transition-all duration-500 hover:text-blue-500'> جستجو</Link>
                 </li>
             </ul>
 
