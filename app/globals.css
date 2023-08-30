@@ -15,6 +15,22 @@ body{
   box-sizing: border-box;
 }
 
+.sliderContainer{
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.sliderContainer::-webkit-scrollbar{
+  height: 0;
+  width: 0;
+}
+
+.sliderItem{
+  scroll-snap-align: start;
+}
+
+
+
 @font-face{
   font-family: vazirblack;
   src: url('/font/Vazir-Black.ttf');

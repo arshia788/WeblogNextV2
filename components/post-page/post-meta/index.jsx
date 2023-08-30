@@ -3,11 +3,12 @@ import {BiLogoTelegram} from 'react-icons/bi';
 import {BsTwitter} from 'react-icons/bs';
 import {BsLink45Deg} from 'react-icons/bs';
 import {BsFillBookmarkFill} from 'react-icons/bs';
+import { BiLike } from 'react-icons/bi';
 
 
 export default function PostMeta({data}) {
   return (
-    <div className='flex flex-col gap-4 w-[280px] min-w-[280px]'>
+    <div className='flex flex-col gap-4 w-[240px] min-w-[240px]'>
 
         <div className='flex justify-between items-center gap-4 text-base sm:text-sm'>
             <div className='flex justify-center items-center '>
@@ -24,7 +25,8 @@ export default function PostMeta({data}) {
             <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BiLogoTelegram className='w-6 h-6 text-zinc-600 transition-all duration-300 hover:bg-blue-500'/></Link>
             <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BsTwitter className='w-6 h-6 text-zinc-600 transition-all duration-300 hover:bg-blue-500'/></Link>
             <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BsLink45Deg className='w-7 h-7 text-zinc-600 transition-all duration-300 hover:bg-blue-500'/></Link>
-            <Link href={`https://telegram.me/${data.blog_link}/${data.slug}`}><BsFillBookmarkFill className='w-[22px] h-[22px] text-zinc-600 transition-all duration-300 hover:bg-blue-500'/></Link>
+            <BiLike className='cursor-pointer w-[22px] h-[22px] text-zinc-600 transition-all duration-300 hover:bg-blue-500'/>
+            <BsFillBookmarkFill className='cursor-pointer w-[22px] h-[22px] text-zinc-600 transition-all duration-300 hover:bg-blue-500'/>
         </div>
     </div>
   )

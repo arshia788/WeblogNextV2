@@ -3,6 +3,10 @@ import BlogerBox from '@/components/boxes/Bloger-box';
 import PostMeta from '@/components/post-page/post-meta';
 import RandomPostBox from '@/components/boxes/random-post';
 import Image from 'next/image';
+import BlogOtherPost from '@/components/slider/blog-other-posts';
+
+import { BiLike } from 'react-icons/bi';
+import { BsFillBookmarkFill } from 'react-icons/bs';
 
 export default function SinglePostPage({ params }) {
 
@@ -25,6 +29,7 @@ export default function SinglePostPage({ params }) {
     comments: [
 
     ],
+    likes_number:10
 
   };
 
@@ -35,12 +40,6 @@ export default function SinglePostPage({ params }) {
     link: data.blog_link
   };
 
-  const randomPosts=[
-    {
-      
-    },
-  ]
-
   const metaDataCompData = {
     study_time: data.study_time,
     created_at: data.created_at,
@@ -49,68 +48,125 @@ export default function SinglePostPage({ params }) {
   }
 
 
+  const randomPosts = [
+    {
+      image: '/images/posts/mobile1.jpg',
+      title: 'خحشیس شیشئسحخی شخی',
+      short_desc: 'شخیدشخیسهد شصیدخ شسیشی',
+      link: '/test'
+    },
+    {
+      image: '/images/posts/mobile1.jpg',
+      title: 'خحشیس شیشئسحخی شخی',
+      short_desc: 'شخیدشخیسهد شصیدخ شسیشی',
+      link: '/test'
+    },
+    {
+      image: '/images/posts/mobile1.jpg',
+      title: 'خحشیس شیشئسحخی شخی',
+      short_desc: 'شخیدشخیسهد شصیدخ شسیشی',
+      link: '/test'
+    },
+    {
+      image: '/images/posts/mobile1.jpg',
+      title: 'خحشیس شیشئسحخی شخی',
+      short_desc: 'شخیدشخیسهد شصیدخ شسیشی',
+      link: '/test'
+    },
+    {
+      image: '/images/posts/mobile1.jpg',
+      title: 'خحشیس شیشئسحخی شخی',
+      short_desc: 'شخیدشخیسهد شصیدخ شسیشی',
+      link: '/test'
+    },
+  ]
+
   return (
-    <div className='flex justify-between items-start gap-4'>
+    <div className='felx flex-col gap-12 w-full mt-14'>
+      <div className='flex justify-between items-start gap-4'>
 
-      <main className='felx flex-col gap-12 w-full rounded-lg'>
+        <main className='felx flex-col gap-12 w-full '>
 
-        <div className='felx flex-col gap-12 w-full bg-zinc-100 rounded-lg'>
-          <BreadCrumb blog_link={data.blog_link} blog_title={data.blog_title} Post_title={data.title} />
+          <div className='felx flex-col gap-12 w-full bg-zinc-100 rounded-lg'>
+            <div className='flex justify-between items-center w-full'>
 
+              <BreadCrumb blog_link={data.blog_link} blog_title={data.blog_title} Post_title={data.title} />
 
-          <section className='flex justify-between items-center gap-4'>
-            <BlogerBox data={blogerData} />
-            <PostMeta data={metaDataCompData} />
-          </section>
-
-          <section className='flex flex-col gap-12 w-full'>
-            <h1>عموان این مقاله</h1>
-            <div className=' flex justify-center items-center '>
-              <div className='relative w-[700px] h-[500px]'>
-                <Image src={data.image} alt={data.title} fill className='object-cover rounded-lg' title={data.title} />
+              <div className='bg-white p-2 rounded-xl flex justify-center items-center'>
+                <BiLike className='cursor-pointer w-[22px] h-[22px] text-zinc-600 transition-all duration-300 hover:bg-blue-500' />
+                <span>
+                  {data.likes_number}
+                </span>
               </div>
+
             </div>
 
-            <p className='text-justify leading-9 text-zinc-700'>{data.details}</p>
 
-            <div className='flex justify-start items-center gap-4 flex-wrap'>
-              {data.categories.map((item, index) => (
-                <div key={index} className='bg-zinc-200 rounded px-3 py-1 text-base sm:text-sm'>{item} #</div>
-              ))}
-            </div>
+            <section className='flex justify-between items-center gap-4'>
+              <BlogerBox data={blogerData} />
+              <PostMeta data={metaDataCompData} />
+            </section>
 
-            <div className='flex justify-start items-center gap-4 flex-wrap'>
-              {data.tags.map((item, index) => (
-                <div key={index} className='bg-zinc-200 rounded px-3 py-1 text-base sm:text-sm'>{item} #</div>
-              ))}
-            </div>
+            <section className='flex flex-col gap-12 w-full'>
+              <h1>عموان این مقاله</h1>
+              <div className=' flex justify-center items-center '>
+                <div className='relative w-[700px] h-[500px]'>
+                  <Image src={data.image} alt={data.title} fill className='object-cover rounded-lg' title={data.title} />
+                </div>
+              </div>
 
-          </section>
+              <p className='text-justify leading-9 text-zinc-700'>{data.details}</p>
+
+              <div className='flex justify-start items-center gap-4 flex-wrap'>
+                {data.categories.map((item, index) => (
+                  <div key={index} className='bg-zinc-200 rounded px-3 py-1 text-base sm:text-sm'>{item} #</div>
+                ))}
+              </div>
+
+              <div className='flex justify-start items-center gap-4 flex-wrap'>
+                {data.tags.map((item, index) => (
+                  <div key={index} className='bg-zinc-200 rounded px-3 py-1 text-base sm:text-sm'>{item} #</div>
+                ))}
+              </div>
+
+            </section>
+          </div>
+
+
+        </main>
+
+        <aside className='sticky top-[5.8rem] left-0 w-[360px] min-w-[360px] flex flex-col gap-4'>
+
+          <div className='bg-zinc-100 rounded-lg p-4'>
+            <BlogerBox data={blogerData} />
+          </div>
+          <div className='bg-zinc-100 rounded-lg p-4 flex flex-col gap-6'>
+            {
+              randomPosts.map((item, index) => <RandomPostBox key={index} data={item} />)
+            }
+          </div>
+
+        </aside>
+
+      </div>
+
+      <section className='flex flex-col gap-12 w-full bg-zinc-100 rounded-lg'>
+        <BlogOtherPost />
+      </section>
+
+      <section className='flex flex-col gap-12 w-full bg-zinc-100 rounded-lg h-[400px]'>
+        <h2>    دیدگاهای این مقاله </h2>
+      </section>
+
+      <div className='fixed bottom-2 right-0 left-0 flex justify-center items-center'>
+
+        <div className='flex justify-center items-center gap-6 bg-[#ffffffdd] p-2 rounded-full'>
+          <BiLike className='cursor-pointer w-[22px] h-[22px] text-zinc-600 transition-all duration-300 hover:bg-blue-500' />
+
+          <BsFillBookmarkFill className='cursor-pointer w-[22px] h-[22px] text-zinc-600 transition-all duration-300 hover:bg-blue-500' />
         </div>
 
-        <section className='flex flex-col gap-12 w-full bg-zinc-100 rounded-lg'>
-          <h1>  مقالات دیگر این وبلاگ</h1>
-        </section>
-
-        <section className='flex flex-col gap-12 w-full bg-zinc-100 rounded-lg h-[400px]'>
-          <h1>    دیدگاهای این مقاله </h1>
-        </section>
-
-      </main>
-
-      <aside className='w-[360px] min-w-[360px] flex flex-col gap-12'>
-        
-        <div className='bg-zinc-100 rounded-lg p-4'>
-          <BlogerBox data={blogerData}/>
-        </div>
-        <div className='bg-zinc-100 rounded-lg p-4 flex flex-col gap-4'>
-          <RandomPostBox data={blogerData}/>
-          <RandomPostBox data={blogerData}/>
-          <RandomPostBox data={blogerData}/>
-          <RandomPostBox data={blogerData}/>
-        </div>
-
-      </aside>
+      </div>
 
     </div>
   )
