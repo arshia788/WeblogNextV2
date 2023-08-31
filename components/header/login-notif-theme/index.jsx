@@ -2,8 +2,13 @@ import {IoNotificationsOutline} from 'react-icons/io5';
 
 import {FiMoon} from 'react-icons/fi';
 import {BsSun} from 'react-icons/bs';
+import LogInAndUserImage from '../login-and-user-image';
+
 
 export default function LogInNotifTheme() {
+
+
+
   return (
     <div className='flex justify-end items-center gap-4 w-[250px]'>
 
@@ -22,10 +27,7 @@ export default function LogInNotifTheme() {
         </div>
 
       {/* login */}
-      <div>
-        <button className='rounded bg-blue-500 px-3 py-1 text-white text-base  sm:text-sm '>ورود / ثبت نام</button>
-      </div>
-
+      <LogInAndUserImage />
     </div>
   )
 }

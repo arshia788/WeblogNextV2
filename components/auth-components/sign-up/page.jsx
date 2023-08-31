@@ -91,7 +91,7 @@ export default function SignUpComponent() {
                 <input
                 autoComplete='off' 
                 type='text' 
-                placeholder='نام نمایشی' className='border-2 border-zinc-200 rounded-md p-2 outline-none focus:border-blue-500 w-full'
+                placeholder='نام وبلاگ' className='border-2 border-zinc-200 rounded-md p-2 outline-none focus:border-blue-500 w-full'
                 {
                     ...register('blog_name',{
                         required:true,
