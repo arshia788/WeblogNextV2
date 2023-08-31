@@ -17,7 +17,7 @@ export default function LogInAndUserImage() {
             :
             <Image 
             className="rounded-full border-2 border-blue-500 transition-all duration-300 hover:bg-blue-600"
-            src={'https://api.dicebear.com/7.x/bottts/svg'} width={60} height={60} alt="test"/>
+            src={'https://avatars.dicebear.com/api/bottts/irueoi.svg'} width={60} height={60} alt="test"/>
         }
     </div>
   )

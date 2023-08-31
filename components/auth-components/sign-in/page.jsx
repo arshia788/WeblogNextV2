@@ -20,10 +20,15 @@ export default function SignInComponent() {
 
         const formData={
             phone:watch('phone'),
-            password:watch('password'),
+            password:watch('password') ,
         }
 
         console.log(formData);
+    }
+
+    const activeBtn = {
+        phone: watch('phone') ?watch('phone'):'' ,
+        password: watch('password') ?watch('password'):'' ,
     }
 
 
@@ -96,9 +101,26 @@ export default function SignInComponent() {
 
             </div>
 
-            <button 
-            className='bg-blue-500 transition-all duration-500 hover:bg-blue-600 text-white flex justify-center items-center h-10 w-full rounded-md '
-            type='submit'> ورود</button>
+            <button
+
+                // nmizari aslan click anjam besheh agar in shart ha true nabashe. 
+                    disabled={
+                            activeBtn.phone.length > 0 &&
+                            activeBtn.password.length > 0
+                            ? false
+                            : true
+                    }
+                    className=
+                    {
+                            activeBtn.phone.length > 0 &&
+                            activeBtn.password.length > 0 
+                            ?
+                            'bg-blue-500 transition-all duration-500 hover:bg-blue-600 text-white flex justify-center items-center h-10 w-full rounded-md '
+                            :
+                            'bg-blue-300 transition-all duration-500 hover:bg-blue-400 text-white flex justify-center items-center h-10 w-full rounded-md '
+                    }
+
+                    type='submit'>ثبت نام</button>
         </form>
 
     </div>

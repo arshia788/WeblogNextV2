@@ -3,6 +3,7 @@ import {IoNotificationsOutline} from 'react-icons/io5';
 import {FiMoon} from 'react-icons/fi';
 import {BsSun} from 'react-icons/bs';
 import LogInAndUserImage from '../login-and-user-image';
+import Headersearch from '../header-search';
 
 
 export default function LogInNotifTheme() {
@@ -10,8 +11,9 @@ export default function LogInNotifTheme() {
 
 
   return (
-    <div className='flex justify-end items-center gap-4 w-[250px]'>
-
+    <div className='flex justify-end items-center gap-4'>
+      
+      <Headersearch />
       {/* dark ngiht */}
 
         <div className='relative flex justify-center items-center gap-1 border-2 border-blue-500 w-[54px] h-[28px] bg-white rounded-full'>

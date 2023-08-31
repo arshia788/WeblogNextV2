@@ -110,7 +110,7 @@ export default function SliderComp() {
                 </div>
             </div>
 
-            <div className="text-sm border-2 border-blue-500 bg-white rounded p-1 z-50 absolute left-2 top-5">پیشنهاد سردبیر.</div>
+            <div className="text-sm border-2 border-blue-500 bg-white rounded p-1 z-40 absolute left-2 top-5">پیشنهاد سردبیر.</div>
 
 
         </div>
