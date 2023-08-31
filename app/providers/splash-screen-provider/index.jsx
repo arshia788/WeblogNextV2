@@ -1,20 +1,19 @@
 'use client';
 
+import { useState } from "react";
+
 import SplashScreenBox from "@/components/splash-screen-box";
 
-import { usePathname } from 'next/navigation';
-import { useState } from "react";
+// import { usePathname } from 'next/navigation';
 
 export default function SplashScreenProvider({children}) {
 
-    // ba path name miay on url ro migiri 
 
-    const pathname = usePathname();
+    // const pathname = usePathname();
 
-    // gofti agar home hast biad behet begeh true agar nabashe false mideh
-    const isHome = pathname === '/';    
+    // const isHome = pathname === '/';    
 
-    const [isLoading,setIsLoading]= useState(isHome);
+    const [isLoading,setIsLoading]= useState(true);
 
     setTimeout(()=>{
         setIsLoading(false)

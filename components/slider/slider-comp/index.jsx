@@ -47,7 +47,8 @@ export default function SliderComp() {
             link: '/posts/post5',
             src: '/images/posts/laptop1.jpg'
         },
-    ]
+    ];
+
 
     // inja ham omadi object 1 ro behesh dadi.  
     const [activeSlide, setActiveSlide] = useState(postsData[0]);
@@ -109,7 +110,7 @@ export default function SliderComp() {
                 </div>
             </div>
 
-            <div className="text-sm border-2 border-blue-500 bg-white rounded p-1 z-50 absolute left-5 top-5">پیشنهاد سردبیر.</div>
+            <div className="text-sm border-2 border-blue-500 bg-white rounded p-1 z-50 absolute left-2 top-5">پیشنهاد سردبیر.</div>
 
 
         </div>

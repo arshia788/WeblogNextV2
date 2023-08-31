@@ -19,8 +19,8 @@ export default function BlogMainBox({ data }) {
 
             <div className="flex flex-col gap-4 p-[.5rem]">
 
-                <Link href={data.slug} className="line-clamp-2 h-12">
-                    <h3>{data.title}</h3>
+                <Link href={data.slug} className="line-clamp-2 h-12 transition-all duration-500 hover:text-blue-400" >
+                    <h3 className="">{data.title}</h3>
                 </Link>
                 
                 <p className="text-zinc-600 line-clamp-3 text-base sm:text-sm h-16">{data.short_desc}</p>

@@ -18,7 +18,7 @@ export default function SliderImage({ data, animationHandler }) {
       
       <Image src={data.src} alt={data.title} fill className="animate__animated animate__fast  rounded-lg object-cover" />
 
-      <Link href={`/posts/${data.link}`} className="animate__animated animate__fast  absolute bottom-2 left-2 h-12 bg-white p-2 rounded line-clamp-1">
+      <Link href={`/posts/${data.link}`} className=" transition-all duration-500 hover:text-blue-400 animate__animated animate__fast  absolute bottom-2 left-2 right-2 h-12 bg-white p-2 rounded line-clamp-1">
         <h2>{data.title}</h2>
       </Link>
 

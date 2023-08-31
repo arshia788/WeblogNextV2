@@ -15,7 +15,8 @@ export default function SinglePostPage({ params }) {
     blog_title: 'عنوان وبلاگ',
     blog_link: "nextjs_blog",
     blog_image: '/images/ads/5556583.jpg',
-    short_desc: 'وبلاگ تستی',
+    blog_short_desc: 'وبلاگ تستی',
+    short_desc:"توضیحات این مقاله",
     study_time: 15,
     created_at: '15 دی 1410',
     slug: 'post_slug',
@@ -36,7 +37,7 @@ export default function SinglePostPage({ params }) {
   const blogerData = {
     image: data.blog_image,
     title: data.blog_title,
-    short_desc: data.short_desc,
+    short_desc: data.blog_short_desc,
     link: data.blog_link
   };
 
@@ -45,7 +46,7 @@ export default function SinglePostPage({ params }) {
     created_at: data.created_at,
     blog_link: data.blog_link,
     slug: data.slug
-  }
+  };
 
 
   const randomPosts = [
@@ -79,7 +80,7 @@ export default function SinglePostPage({ params }) {
       short_desc: 'شخیدشخیسهد شصیدخ شسیشی',
       link: '/test'
     },
-  ]
+  ];
 
   return (
     <div className='felx flex-col gap-12 w-full mt-14'>
@@ -109,6 +110,9 @@ export default function SinglePostPage({ params }) {
 
             <section className='flex flex-col gap-12 w-full'>
               <h1>عموان این مقاله</h1>
+
+              <p className='text-justify leading-9 text-zinc-700'>{data.short_desc}</p>
+
               <div className=' flex justify-center items-center '>
                 <div className='relative w-[700px] h-[500px]'>
                   <Image src={data.image} alt={data.title} fill className='object-cover rounded-lg' title={data.title} />
@@ -160,7 +164,7 @@ export default function SinglePostPage({ params }) {
 
       <div className='fixed bottom-2 right-0 left-0 flex justify-center items-center'>
 
-        <div className='flex justify-center items-center gap-6 bg-[#ffffffdd] p-2 rounded-full'>
+        <div className='flex justify-center items-center backdrop-blur-md gap-6 bg-[#ffffffcc] p-2 rounded-full'>
           <BiLike className='cursor-pointer w-[22px] h-[22px] text-zinc-600 transition-all duration-300 hover:bg-blue-500' />
 
           <BsFillBookmarkFill className='cursor-pointer w-[22px] h-[22px] text-zinc-600 transition-all duration-300 hover:bg-blue-500' />

@@ -23,7 +23,7 @@ export default function NewBlogBox({ data }) {
 
                     <div className='flex flex-col gap-12 h-[15rem] p-[.5rem] justify-between'>
 
-                        <Link href={data.slug} className="line-clamp-2 h-12">
+                        <Link href={data.slug} className="line-clamp-2 h-12  transition-all duration-500 hover:text-blue-400">
                             <h3>{data.title}</h3>
                         </Link>
 
