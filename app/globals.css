@@ -29,6 +29,10 @@ body{
   scroll-snap-align: start;
 }
 
+.ltr{
+  direction: ltr;
+}
+
 
 
 @font-face{
