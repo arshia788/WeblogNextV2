@@ -10,21 +10,24 @@ export const metadata = {
 
 // providers
 import SplashScreenProvider from './providers/splash-screen-provider';
+import ReduxToolkitProvider from './providers/redux-toolkit-provider';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body >
-        <SplashScreenProvider>
-          <div className='flex flex-col gap-12'>
-            <Header />
+        <ReduxToolkitProvider>
+          <SplashScreenProvider>
+            <div className='flex flex-col gap-12'>
+              <Header />
 
-            <div className='container mx-auto '>
-              {children}
-              <Footer />
+              <div className='container mx-auto '>
+                {children}
+                <Footer />
+              </div>
             </div>
-          </div>
-        </SplashScreenProvider>
+          </SplashScreenProvider>
+        </ReduxToolkitProvider>
       </body>
 
     </html>
