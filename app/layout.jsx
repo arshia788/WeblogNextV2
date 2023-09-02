@@ -11,6 +11,8 @@ export const metadata = {
 // providers
 import SplashScreenProvider from './providers/splash-screen-provider';
 import ReduxToolkitProvider from './providers/redux-toolkit-provider';
+import ToastProvider from './providers/toas-provider';
+
 
 export default function RootLayout({ children }) {
   return (
@@ -18,14 +20,16 @@ export default function RootLayout({ children }) {
       <body >
         <ReduxToolkitProvider>
           <SplashScreenProvider>
-            <div className='flex flex-col gap-12'>
-              <Header />
+            <ToastProvider>
+              <div className='flex flex-col gap-12'>
+                <Header />
 
-              <div className='container mx-auto '>
-                {children}
-                <Footer />
+                <div className='container mx-auto '>
+                  {children}
+                  <Footer />
+                </div>
               </div>
-            </div>
+            </ToastProvider>
           </SplashScreenProvider>
         </ReduxToolkitProvider>
       </body>

@@ -143,7 +143,7 @@ export async function POST(req){
         };
 
         await User.findByIdAndUpdate(createdUserData._id, userToken, {new:true});
-        
+
 
         // SETTING TOKEIN IN COOKIE
         const cookieStore= cookies();
@@ -155,8 +155,9 @@ export async function POST(req){
 
             userloged:true,
             role:3,
-
             user_is_active:false,
+            blog_slug:userFullData.username
+
         }
 
         return NextResponse.json({data:send_data, message:' ثبت نام با موفقیت انجام شد'},{status:200});

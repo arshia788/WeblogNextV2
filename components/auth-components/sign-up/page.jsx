@@ -2,9 +2,30 @@
 
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
+import { useDispatch } from 'react-redux';
+
+// vaseh role karbar 
+import { setRoleVlaue } from '@/store/slices/roleSlice';
+
+// va log shodanesh 
+import { loggedtoTrue } from '@/store/slices/logedSlice';
+
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export default function SignUpComponent() {
+
+    const dispatch= useDispatch();
+    const router= useRouter();
+    const [userBlogSlug, setBlogSlug]= useState(false);
+
+    useEffect(()=>{
+
+        if(userBlogSlug !==false) router.push(`/blog/${userBlogSlug}`)
+
+    },[userBlogSlug])
 
     const {
         register,
@@ -19,6 +40,20 @@ export default function SignUpComponent() {
 
     const signUper = () => {
 
+        toast.success("لطفا صبر کنید",{
+            autoClose: 3000,
+
+            hideProgressBar: false,
+
+            closeOnClick: true,
+
+            pauseOnHover: true,
+
+            draggable: true,
+
+            progress: undefined,
+        })  
+
         const formData = {
             username: watch('username'),
             displayname: watch('displayname'),
@@ -28,10 +63,49 @@ export default function SignUpComponent() {
         }
 
         axios.post('/api/user/add',formData)
-        .then(data=> console.log(data.response))
+        .then(data=> {
+
+            toast.success("ثبت نام با موفقین انجام شد",{
+                autoClose: 3000,
+
+                hideProgressBar: false,
+ 
+                closeOnClick: true,
+ 
+                pauseOnHover: true,
+ 
+                draggable: true,
+ 
+                progress: undefined,
+            })  
+
+            // setting redux
+
+            // yani karbar normal
+            dispatch(loggedtoTrue());
+            dispatch(setRoleVlaue(3));
+            setBlogSlug(data.data.blog_slug)
+
+
+
+        })
+
         .catch(error=>{
             const message= error.response.data.data;
-            console.log(message);
+
+            toast.success(message,{
+                autoClose: 3000,
+
+                hideProgressBar: false,
+ 
+                closeOnClick: true,
+ 
+                pauseOnHover: true,
+ 
+                draggable: true,
+ 
+                progress: undefined,
+            })  
         } )
     }
 
