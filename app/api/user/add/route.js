@@ -11,16 +11,18 @@ import  Jwt  from "jsonwebtoken";
 export async function POST(req){
 
     try {
-        await connect();
+        connect();
         const inputData= await req.json();
+        console.log(inputData);
         
 
         // length_validations.
+
         if(inputData.username.length <8 || inputData.username.length > 20){
             return NextResponse.json({data:"نام کاربری باید بین 8 تا 20 کارکتر باشد"}, {status:402});
         }
 
-        if(inputData.display_name.length <8 || inputData.display_name.length > 20){
+        if(inputData.displayname.length <8 || inputData.displayname.length > 20){
             return NextResponse.json({data:"نام نمایشی باید بین 8 تا 20 کارکتر باشد"}, {status:402});
         }
 
@@ -28,11 +30,18 @@ export async function POST(req){
             return NextResponse.json({data:"نام کاربری باید بین 8 تا 20 کارکتر باشد"}, {status:402});
         }
 
+        function is_numeric(str){
+            return /^\d+$/.test(str);
+        }
+
+        if(is_numeric(inputData.phone) === false){
+            return NextResponse.json({data:"شماره همراه باید عدد باشد"},{status:402})
+        }
+
         if(inputData.phone.length !== 10){
             return NextResponse.json({data:" شماره همراه باید بین 10 کارکتر و بدون +98 یا صفر ابتدای باشه"}, {status:402});
         }
 
-        // baray in keh bereh to in error gofti agar kam tar az 0 bod biad bereh to in error. 
         
         if(inputData.phone <0 ){
             return NextResponse.json({data:" شماره همراه باید عدد باشد"}, {status:402});
@@ -45,8 +54,6 @@ export async function POST(req){
 
         // Unique_validations 
 
-        // nabyad mesle in ha bashe jai 
-        blog_name,username,phone
 
         const phoneFound= await User.findOne({phone:inputData.phone});
         if(phoneFound){
@@ -73,20 +80,13 @@ export async function POST(req){
         }
 
 
-        // For username spaces must convert dash 
-        // for pass spaces should be deleted 
-
-        // inja miad replace mikoneh space ha ro ba -
         const newUsername= inputData.username.replace(/\s+/g,'-').toLowerCase();
 
-        // string khali yani miad hazfeh mikoneh on ro 
-
-        // newPassword baray in gofti newPassword ta hata on space ha ham rafteh bashan. 
         const newPassword= inputData.password.replace(/\s+/g,'').toLowerCase();
 
 
         // bcryptJs password  
-        const hashedPassword= bcrypt.hash(newPassword, 10);
+        const hashedPassword= await bcrypt.hash(newPassword, 10);
 
         // Making_active_code.
 
@@ -98,14 +98,17 @@ export async function POST(req){
         
 
         // CREATIN_USER
+
+        const date= new Date();
+
         const userFullData={
 
-            blog_name:inputData.blog_name,
             username:newUsername,
-            display_name:inputData.display_name,
+            blog_name:inputData.blog_name,
+            displayname:inputData.displayname,
             password:hashedPassword,
             phone:inputData.phone,
-            createdAt: "1403/3/3" ,
+            createdAt: date.toLocaleDateString("fa-IR",{year:"numeric", month:'long', day:'numeric'}) ,
             default_image:`https://avatars.dicebear.com/api/bottts/${newUsername}.svg`,
 
             // kasi ke signup kardan 3 hast 
@@ -125,12 +128,14 @@ export async function POST(req){
             notifications:[],
             token:"",
         }
+
+        // console.log(userFullData); 
          
         const createdUserData= await User.create(userFullData);
 
         // JWT-TOKEN.
 
-        // miay inja token ro misazi 
+        
         const createdToken= Jwt.sign({_id:createdUserData._id, username:createdUserData.username}, process.env.TOKEN_SECRET);
 
         const userToken= {
@@ -138,6 +143,7 @@ export async function POST(req){
         };
 
         await User.findByIdAndUpdate(createdUserData._id, userToken, {new:true});
+        
 
         // SETTING TOKEIN IN COOKIE
         const cookieStore= cookies();
@@ -146,10 +152,10 @@ export async function POST(req){
         // DATA TO FRONT
 
         const send_data={
+
             userloged:true,
             role:3,
 
-            // chon tazeh sabt nam kardeh
             user_is_active:false,
         }
 
@@ -157,8 +163,9 @@ export async function POST(req){
 
         
     } catch (error) {
-        
-        return NextResponse.json({data:"failed"}, {status:401});
+
+        console.log(error);
+        return NextResponse.json({data:"ثبت نام انجام نشد"}, {status:401});
          
     }
 

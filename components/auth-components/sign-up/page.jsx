@@ -1,6 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 
 export default function SignUpComponent() {
@@ -26,7 +27,12 @@ export default function SignUpComponent() {
             password: watch('password'),
         }
 
-        console.log(formData);
+        axios.post('/api/user/add',formData)
+        .then(data=> console.log(data.response))
+        .catch(error=>{
+            const message= error.response.data.data;
+            console.log(message);
+        } )
     }
 
     const activeBtn = {
