@@ -5,10 +5,10 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const userIsActiveSlice= createSlice({
     name:'userIsActive',
-    initialState:false,
+    initialState:{value:false},
     reducers:{
-        userIsActivetoFalse: (state,action)=>{state=false},
-        userIsActivetoTrue: (state,action)=>{state=true},
+        userIsActivetoFalse: (state,action)=>{state.value=false},
+        userIsActivetoTrue: (state,action)=>{state.value=true},
     }
 })
 

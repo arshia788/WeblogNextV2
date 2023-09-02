@@ -9,7 +9,7 @@ export default function Header() {
 
             <header className="flex justify-between items-center py-2 px-8 shadow-[0px_4px_5px_rgba(0,0,0,0.25)] z-50 bg-[#ffffffdd] fixed top-0 left-0 right-0 backdrop-blur-md">
                 
-                <Link href={'/'} className="w-[230px] cursor-pointer">
+                <Link href={'/'} className="w-fit cursor-pointer">
                     <Image src={'/logo-70.png'} alt="logo" width={60} height={60} />
                 </Link>
 

@@ -156,6 +156,7 @@ export async function POST(req){
             userloged:true,
             role:3,
             user_is_active:false,
+            user_image:userFullData.default_image,
             blog_slug:userFullData.username
 
         }

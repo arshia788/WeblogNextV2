@@ -12,6 +12,9 @@ import { setRoleVlaue } from '@/store/slices/roleSlice';
 // va log shodanesh 
 import { loggedtoTrue } from '@/store/slices/logedSlice';
 
+// image user.
+import  { setuserImageSlice } from '@/store/slices/userImageSlice';
+
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -40,7 +43,7 @@ export default function SignUpComponent() {
 
     const signUper = () => {
 
-        toast.success("لطفا صبر کنید",{
+        toast.info("لطفا صبر کنید",{
             autoClose: 3000,
 
             hideProgressBar: false,
@@ -84,16 +87,15 @@ export default function SignUpComponent() {
             // yani karbar normal
             dispatch(loggedtoTrue());
             dispatch(setRoleVlaue(3));
-            setBlogSlug(data.data.blog_slug)
-
-
+            dispatch(setuserImageSlice(data.data.data.user_image));
+            setBlogSlug(data.data.data.blog_slug);
 
         })
 
         .catch(error=>{
-            const message= error.response.data.data;
+            const message= error.response.data ? error.response.data:'';
 
-            toast.success(message,{
+            toast.error(message,{
                 autoClose: 3000,
 
                 hideProgressBar: false,

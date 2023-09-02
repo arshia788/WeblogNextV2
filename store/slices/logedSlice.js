@@ -13,12 +13,12 @@ const loggedSlice= createSlice({
 
     // chon aval bayad false bashe ta moghi ke biad o log bokoneh. 
 
-    initialState:false,
+    initialState:{value:false},
     reducers:{
-        loggedtoFalse: (state,action)=>{state=false},
+        loggedtoFalse: (state,action)=>{state.value=false},
 
         // agar inja login kard bad biad true beshe. 
-        loggedtoTrue: (state,action)=>{state=true},
+        loggedtoTrue: (state,action)=>{state.value=true},
     }
 })
 

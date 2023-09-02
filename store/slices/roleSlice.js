@@ -9,12 +9,12 @@ const roleSlice= createSlice({
 
 
     
-    initialState:4,
+    initialState:{value:4},
     reducers:{
 
 
         setRoleVlaue: (state,action)=>{
-            state=action.payload
+            state.value =action.payload
         },
     }
 })
