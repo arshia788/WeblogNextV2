@@ -56,11 +56,6 @@ export async function POST(req){
         if(!validPassword) return NextResponse.json({data:" رمز عبور اشتباه است  "},{status:402})
 
 
-
-        
-
-
-
         // JWT-TOKEN.        
         const createdToken= foundPhone.token
 

@@ -2,8 +2,24 @@ import Image from "next/image";
 import LogInNotifTheme from "./login-notif-theme";
 import Link from "next/link";
 
+import ReduxVarsDefaultValueSetter from "./reudx-vars-setter";
 
-export default function Header() {
+
+// rafti dar khast ro barash ferestadi.
+const getData= async()=>{
+     
+    const data= await fetch(`${process.env.SERVER_URL}/api/user/token-to-user`,{cache:"no-store"});
+    if(!data){
+        throw new Error("خطا در اطلاعات کاربر")
+    }
+    return data.json()
+}
+
+export default async function Header() {
+
+    const data= await getData();
+    console.log(data);
+
     return (
         <div>
 
@@ -14,6 +30,7 @@ export default function Header() {
                 </Link>
 
                 <LogInNotifTheme />
+                <ReduxVarsDefaultValueSetter data={data}/>
 
             </header>
 

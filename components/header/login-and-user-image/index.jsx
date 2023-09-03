@@ -8,10 +8,11 @@ import {  useSelector } from "react-redux";
 export default function LogInAndUserImage() {
 
   const logged= useSelector(store=> store.logedSlice.value); 
-  const userImage= useSelector(store=> store.userImageSlice.value); 
-  const roleSlice= useSelector(store=> store.roleSlice.value); 
-  const user_is_active= useSelector(store=> store.user_is_active.value); 
-  console.log(roleSlice);
+  const userImage= useSelector(store=> store.userImageSlice.value);
+   
+  // const roleSlice= useSelector(store=> store.roleSlice.value); 
+  // const user_is_active= useSelector(store=> store.user_is_active.value); 
+  // console.log(roleSlice);
 
 
   return (
