@@ -1,9 +1,35 @@
 'use client';
 
-import {useForm} from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+
+import { toast } from 'react-toastify';
+
+// redux----
+
+// vaseh role karbar 
+import { setRoleVlaue } from '@/store/slices/roleSlice';
+// va log shodanesh 
+import { loggedtoTrue } from '@/store/slices/logedSlice';
+// image user.
+import  { setuserImageSlice } from '@/store/slices/userImageSlice';
+
+// vase phone number
+import { userIsActivetoFalse } from '@/store/slices/user-is-active';
+import { userIsActivetoTrue } from '@/store/slices/user-is-active';
+
+
 
 
 export default function SignInComponent() {
+
+    const dispatch= useDispatch();
+    const router= useRouter();
+    const [userBlogSlug, setBlogSlug]= useState(false);
+
 
     const {
         register,
@@ -11,19 +37,89 @@ export default function SignInComponent() {
         formState:{errors},
         watch
 
-    // chon dari az next estefadeh mikoni az {} bayad estefadeh bokoni.
     } = useForm({})
 
-    // havaset bashe ke niaz az preventDefault estefadeh bokoni chon khodesh miad anjam mideh in kar ro. 
+    useEffect(()=>{
+
+        if(userBlogSlug !==false) router.push(`/blog/${userBlogSlug}`)
+
+    },[userBlogSlug])
+
     
     const signIner=()=>{
+
+        toast.info("لطفا صبر کنید",{
+            autoClose: 3000,
+
+            hideProgressBar: false,
+
+            closeOnClick: true,
+
+            pauseOnHover: true,
+
+            draggable: true,
+
+            progress: undefined,
+        })  
 
         const formData={
             phone:watch('phone'),
             password:watch('password') ,
         }
 
-        console.log(formData);
+        axios.post('/api/user/sign-in',formData)
+
+        .then(data=> {
+
+            toast.success("خوش آمدید",{
+                autoClose: 3000,
+
+                hideProgressBar: false,
+ 
+                closeOnClick: true,
+ 
+                pauseOnHover: true,
+ 
+                draggable: true,
+ 
+                progress: undefined,
+            });
+
+
+            // yani karbar normal
+            dispatch(loggedtoTrue());
+            dispatch(setRoleVlaue(data.data.data.role));
+
+            if(data.data.data.user_is_active){
+                dispatch(userIsActivetoTrue());
+            }else{
+                dispatch(userIsActivetoFalse());
+            }
+
+
+            dispatch(setuserImageSlice(data.data.data.user_image));
+            setBlogSlug(data.data.data.blog_slug);
+
+        })
+
+        .catch(error=>{
+            const message= error.response.data ? error.response.data:'';
+
+            toast.error(message,{
+                autoClose: 3000,
+
+                hideProgressBar: false,
+ 
+                closeOnClick: true,
+ 
+                pauseOnHover: true,
+ 
+                draggable: true,
+ 
+                progress: undefined,
+            })  
+        } )
+
     }
 
     const activeBtn = {

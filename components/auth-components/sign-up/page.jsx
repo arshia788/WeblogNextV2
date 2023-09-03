@@ -65,7 +65,7 @@ export default function SignUpComponent() {
             password: watch('password'),
         }
 
-        axios.post('/api/user/add',formData)
+        axios.post('/api/user/sign-up',formData)
         .then(data=> {
 
             toast.success("ثبت نام با موفقین انجام شد",{
@@ -82,7 +82,6 @@ export default function SignUpComponent() {
                 progress: undefined,
             })  
 
-            // setting redux
 
             // yani karbar normal
             dispatch(loggedtoTrue());

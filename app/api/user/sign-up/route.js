@@ -150,13 +150,8 @@ export async function POST(req){
         // DATA TO FRONT
 
         const send_data={
-
-            userloged:true,
-            role:3,
-            user_is_active:false,
             user_image:userFullData.default_image,
             blog_slug:userFullData.username
-
         }
 
         return NextResponse.json({data:send_data, message:' ثبت نام با موفقیت انجام شد'},{status:200});
