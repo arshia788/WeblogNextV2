@@ -1,24 +1,27 @@
 import Image from "next/image";
 import LogInNotifTheme from "./login-notif-theme";
 import Link from "next/link";
-
 import ReduxVarsDefaultValueSetter from "./reudx-vars-setter";
+
+import { cookies } from "next/headers";
+
 
 
 // rafti dar khast ro barash ferestadi.
-const getData= async()=>{
-     
-    const data= await fetch(`${process.env.SERVER_URL}/api/user/token-to-user`,{cache:"no-store"});
-    if(!data){
-        throw new Error("خطا در اطلاعات کاربر")
-    }
+const getData= async(token)=>{
+    const data= await fetch(`${process.env.SERVER_URL}/api/user/token-to-user`,{cache:'no-store', headers:{token}});
     return data.json()
 }
 
 export default async function Header() {
+    
+    const cookieStore= cookies();
 
-    const data= await getData();
-    console.log(data);
+    const token= cookieStore.get('token') ? cookieStore.get('token').value : undefined;
+    
+    // inja miay on data ro mefresti be on component fake. 
+    const data= await getData(token);
+
 
     return (
         <div>
@@ -29,9 +32,12 @@ export default async function Header() {
                     <Image src={'/logo-70.png'} alt="logo" width={60} height={60} />
                 </Link>
 
-                <LogInNotifTheme />
-                <ReduxVarsDefaultValueSetter data={data}/>
+                <div className="flex justify-between items-center">
 
+                    <LogInNotifTheme />
+                <ReduxVarsDefaultValueSetter {...data}/>
+
+                </div>
             </header>
 
         </div>

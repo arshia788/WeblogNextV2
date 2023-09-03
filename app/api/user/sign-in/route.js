@@ -5,7 +5,6 @@ import bcrypt from 'bcrypt';
 
 import {cookies} from 'next/headers';
 
-import  Jwt  from "jsonwebtoken";
 
 
 export async function POST(req){
@@ -13,7 +12,6 @@ export async function POST(req){
     try {
         connect();
         const inputData= await req.json();
-        console.log(inputData);
         
 
         // length_validations.
@@ -57,12 +55,14 @@ export async function POST(req){
 
 
         // JWT-TOKEN.        
-        const createdToken= foundPhone.token
+        const createdToken = foundPhone.token
 
 
         // SETTING TOKEIN IN COOKIE
         const cookieStore= cookies();
-        cookieStore.set("token", createdToken);
+
+        // maxAge baray in hast ke vaghti site ro bebandi 
+        cookieStore.set("token", createdToken, {maxAge:60 * 60 * 24* 60});
 
         // DATA TO FRONT
 

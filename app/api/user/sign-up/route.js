@@ -13,7 +13,6 @@ export async function POST(req){
     try {
         connect();
         const inputData= await req.json();
-        console.log(inputData);
         
 
         // length_validations.
@@ -108,6 +107,7 @@ export async function POST(req){
             displayname:inputData.displayname,
             password:hashedPassword,
             phone:inputData.phone,
+            
             createdAt: date.toLocaleDateString("fa-IR",{year:"numeric", month:'long', day:'numeric'}) ,
             
             default_image:`https://secure.gravatar.com/avatar/${newUsername}?s=60&d=identicon`,
@@ -117,7 +117,6 @@ export async function POST(req){
             active_code_number:5,
             user_is_active:false,
 
-            // in ro mizari false ta admin biad motavageh besheh.
             viewed:false,
 
             liked_posts:[],
@@ -125,9 +124,8 @@ export async function POST(req){
             followings:[],
             notifications:[],
             token:"",
-        }
+        };
 
-        // console.log(userFullData); 
          
         const createdUserData= await User.create(userFullData);
 
@@ -145,7 +143,7 @@ export async function POST(req){
 
         // SETTING TOKEIN IN COOKIE
         const cookieStore= cookies();
-        cookieStore.set("token", createdToken);
+        cookieStore.set("token", createdToken, {maxAge:60 * 60 * 24* 60});
 
         // DATA TO FRONT
 

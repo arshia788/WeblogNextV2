@@ -15,7 +15,7 @@ import { setRoleVlaue } from '@/store/slices/roleSlice';
 // va log shodanesh 
 import { loggedtoTrue } from '@/store/slices/logedSlice';
 // image user.
-import  { setuserImageSlice } from '@/store/slices/userImageSlice';
+import  { setUserImageValue } from '@/store/slices/userImageSlice';
 
 // vase phone number
 import { userIsActivetoFalse } from '@/store/slices/user-is-active';
@@ -97,7 +97,7 @@ export default function SignInComponent() {
             }
 
 
-            dispatch(setuserImageSlice(data.data.data.user_image));
+            dispatch(setUserImageValue(data.data.data.user_image));
             setBlogSlug(data.data.data.blog_slug);
 
         })

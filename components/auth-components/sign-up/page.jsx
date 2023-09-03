@@ -13,7 +13,7 @@ import { setRoleVlaue } from '@/store/slices/roleSlice';
 import { loggedtoTrue } from '@/store/slices/logedSlice';
 
 // image user.
-import  { setuserImageSlice } from '@/store/slices/userImageSlice';
+import { setUserImageValue } from '@/store/slices/userImageSlice';
 
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
@@ -86,7 +86,7 @@ export default function SignUpComponent() {
             // yani karbar normal
             dispatch(loggedtoTrue());
             dispatch(setRoleVlaue(3));
-            dispatch(setuserImageSlice(data.data.data.user_image));
+            dispatch(setUserImageValue(data.data.data.user_image));
             setBlogSlug(data.data.data.blog_slug);
 
         })
