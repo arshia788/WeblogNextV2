@@ -15,7 +15,7 @@ export default function LogInAndUserImage() {
   return (
     <div>
         {
-            logged ? 
+            !logged ? 
             <Link href={'/sign-in'} className='rounded bg-blue-500 px-3 py-1 text-white text-base  sm:text-sm '>ورود / ثبت نام</Link>
             
             :

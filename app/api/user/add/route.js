@@ -109,10 +109,8 @@ export async function POST(req){
             password:hashedPassword,
             phone:inputData.phone,
             createdAt: date.toLocaleDateString("fa-IR",{year:"numeric", month:'long', day:'numeric'}) ,
-            default_image:`https://avatars.dicebear.com/api/bottts/${newUsername}.svg`,
-
-            // kasi ke signup kardan 3 hast 
-            // onai ke signup nakardan 4 hastan 
+            
+            default_image:`https://secure.gravatar.com/avatar/${newUsername}?s=60&d=identicon`,
 
             role:3,
             active_code:active_code,
