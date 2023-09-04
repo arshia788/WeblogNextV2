@@ -14,8 +14,8 @@ export default function LogInNotifTheme() {
     <div className='flex justify-end items-center gap-4'>
       
       <Headersearch />
-      {/* dark ngiht */}
 
+      {/* dark ngiht */}
         <div className='relative flex justify-center items-center gap-1 border-2 border-blue-500 w-[54px] h-[28px] bg-white rounded-full'>
           <span className='w-4 h-4'><FiMoon /></span>
           <span className='w-4 h-4'><BsSun /></span>

@@ -14,7 +14,7 @@ export async function GET(req){
         return NextResponse.json({data:users},{status:200});
         
     } catch (error) {
-        
+        console.log(error);
         return NextResponse.json({data:"failed"}, {status:401});
          
     }

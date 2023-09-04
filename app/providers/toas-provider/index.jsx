@@ -1,38 +1,38 @@
 'use client';
 
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
 
 
-export default function ToastProvider({children}) {
+export default function ToastProvider({ children }) {
   return (
     <div>
-        {children}
-        <ToastContainer
+      {children}
+      <ToastContainer
 
-bodyClassName={() => "font-[vazirmedium] text-sm flex items-center"}
+        bodyClassName={() => "font-[vazirmedium] text-sm flex items-center"}
 
-position="top-right"
+        position="top-right"
 
-autoClose={3000}
+        autoClose={3000}
 
-theme="colored"
+        theme="colored"
 
-hideProgressBar={false}
+        hideProgressBar={false}
 
-newestOnTop={false}
+        newestOnTop={false}
 
-closeOnClick
+        closeOnClick
 
-rtl={true}
+        rtl={true}
 
-pauseOnFocusLoss
+        pauseOnFocusLoss
 
-draggable
+        draggable
 
-pauseOnHover
+        pauseOnHover
 
-/ >
+      />
     </div>
   )
 }

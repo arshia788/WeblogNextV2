@@ -10,7 +10,7 @@ import { cookies } from "next/headers";
 // rafti dar khast ro barash ferestadi.
 const getData= async(token)=>{
     const data= await fetch(`${process.env.SERVER_URL}/api/user/token-to-user`,{cache:'no-store', headers:{token}});
-    return data.json()
+    return data.json() 
 }
 
 export default async function Header() {
@@ -35,9 +35,10 @@ export default async function Header() {
                 <div className="flex justify-between items-center">
 
                     <LogInNotifTheme />
-                <ReduxVarsDefaultValueSetter {...data}/>
+                    <ReduxVarsDefaultValueSetter {...data}/>
 
                 </div>
+                
             </header>
 
         </div>

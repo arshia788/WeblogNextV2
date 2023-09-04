@@ -41,8 +41,9 @@ export async function GET(req){
 
         
     } catch (error) {
-        
-        return NextResponse.json({data:"failed"}, {status:401});
+
+        console.log(error);
+        return NextResponse.json({data:"failed"}, {status:200});
          
     }
 

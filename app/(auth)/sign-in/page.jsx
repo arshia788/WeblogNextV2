@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import SignInComponent from '@/components/auth-components/sign-in/page';
+
+import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -7,12 +8,12 @@ const getData= async(token)=>{
 
   const data= await fetch(`${process.env.SERVER_URL}/api/user/token-to-user`,{cache:'no-store', headers:{token}});
 
-
   const outData= await data.json();
 
   if(outData.data.loged){
     redirect('/setting')
-  }else{
+  }
+  else{
     return outData
   }
 
