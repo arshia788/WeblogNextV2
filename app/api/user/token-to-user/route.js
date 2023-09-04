@@ -2,7 +2,6 @@ import User from "@/models/User";
 import connect from "@/utils/connect";
 import { NextResponse } from "next/server";
 
-import { cookies } from "next/headers";
 
 import  Jwt  from "jsonwebtoken";
 
@@ -20,13 +19,9 @@ export async function GET(req){
         
         connect();
 
-        // omadi on token ro gerefti az headers
         const token= req.headers.get("token");
-
-        // khoroji in token 
         const verified= Jwt.verify(token, process.env.TOKEN_SECRET)
 
-        // ba estefadeh az id omadi on karbar ro peda kardi. 
         const userFullData= await User.findById(verified._id) 
 
         send_data={

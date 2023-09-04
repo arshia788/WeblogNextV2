@@ -5,9 +5,6 @@ import ReduxVarsDefaultValueSetter from "./reudx-vars-setter";
 
 import { cookies } from "next/headers";
 
-
-
-// rafti dar khast ro barash ferestadi.
 const getData= async(token)=>{
     const data= await fetch(`${process.env.SERVER_URL}/api/user/token-to-user`,{cache:'no-store', headers:{token}});
     return data.json() 
@@ -17,9 +14,8 @@ export default async function Header() {
     
     const cookieStore= cookies();
 
-    const token= cookieStore.get('token') ? cookieStore.get('token').value : undefined;
+    const token= cookieStore.get('token') ? cookieStore.get('token').value : '';
     
-    // inja miay on data ro mefresti be on component fake. 
     const data= await getData(token);
 
 
@@ -35,7 +31,9 @@ export default async function Header() {
                 <div className="flex justify-between items-center">
 
                     <LogInNotifTheme />
+
                     <ReduxVarsDefaultValueSetter {...data}/>
+                    
 
                 </div>
                 
