@@ -1,6 +1,8 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+// campo---
+import UpdateUserData from '@/components/setting-page-compos/update-user-data';
 
 const getData = async (token) => {
 
@@ -24,6 +26,9 @@ export default async function Setting() {
     const data= await getData(token);
 
     return (
-        <div>Setting</div>
+        <div>
+            <p>Setting</p>
+            <UpdateUserData token={token}/>
+        </div>
     )
 }

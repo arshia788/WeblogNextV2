@@ -142,7 +142,8 @@ export default function SignInComponent() {
                 <input
                 autoComplete='off' 
                 type='text' 
-                placeholder="912 * * * * *" className='ltr border-2 border-zinc-200 rounded-md p-2 outline-none focus:border-blue-500 w-full'
+                placeholder="912 * * * * *"
+                 className='ltr border-2 border-zinc-200 rounded-md p-2 outline-none focus:border-blue-500 w-full'
                 {
                     ...register('phone',{
                         required:true,

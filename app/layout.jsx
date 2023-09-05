@@ -23,11 +23,11 @@ export default function RootLayout({ children }) {
             <ToastProvider>
               <div className='flex flex-col gap-12'>
                 <Header />
-
-                <div className='container mx-auto'>
+                <div className='container mx-auto my-[40px]'>
                   {children}
-                  <Footer />
                 </div>
+
+                <Footer />
               </div>
             </ToastProvider>
           </SplashScreenProvider>

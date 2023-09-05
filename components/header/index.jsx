@@ -1,9 +1,12 @@
 import Image from "next/image";
-import LogInNotifTheme from "./login-notif-theme";
 import Link from "next/link";
+import { cookies } from "next/headers";
+
+// campo---
+import LogInNotifTheme from "./login-notif-theme";
 import ReduxVarsDefaultValueSetter from "./reudx-vars-setter";
 
-import { cookies } from "next/headers";
+
 
 const getData= async(token)=>{
     const data= await fetch(`${process.env.SERVER_URL}/api/user/token-to-user`,{cache:'no-store', headers:{token}});
