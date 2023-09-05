@@ -16,7 +16,8 @@ export default function Posts({params}) {
     else if (params.slug[0] === 'followers'){
       setDetails(<Followers />)
     }    
-  },[])
+    
+  },[params.slug[0]])
 
 
   return (

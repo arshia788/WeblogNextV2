@@ -10,7 +10,6 @@ import { loggedtoTrue } from "@/store/slices/logedSlice";
 export default function ReduxVarsDefaultValueSetter(props) {
     
     
-    console.log('props',props);
     // ! deghat kon ke dari inja to headers miay set mikoni maghadri defaulti ro.
 
     const dispatch = useDispatch();

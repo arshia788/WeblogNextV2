@@ -13,8 +13,7 @@ export default function LogInAndUserImage() {
   const userImage= useSelector(store=> store.userImageSlice.value);
 
 
-  const [menuIsOpen,setMenuIsOpen]= useState(true);
-  console.log(menuIsOpen);
+  const [menuIsOpen,setMenuIsOpen]= useState(false);
 
   return (
     <div>

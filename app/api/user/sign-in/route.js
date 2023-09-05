@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 
 import {cookies} from 'next/headers';
 
+import  Jwt  from "jsonwebtoken";
 
 
 export async function POST(req){
