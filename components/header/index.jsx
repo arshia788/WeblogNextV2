@@ -15,8 +15,9 @@ export default async function Header() {
     const cookieStore= cookies();
 
     const token= cookieStore.get('token') ? cookieStore.get('token').value : '';
-    
+
     const data= await getData(token);
+
 
 
     return (

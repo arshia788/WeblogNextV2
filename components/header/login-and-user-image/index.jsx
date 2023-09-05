@@ -11,7 +11,7 @@ export default function LogInAndUserImage() {
 
   const logged= useSelector(store=> store.logedSlice.value); 
   const userImage= useSelector(store=> store.userImageSlice.value);
-
+  console.log(logged);
 
   const [menuIsOpen,setMenuIsOpen]= useState(false);
 
