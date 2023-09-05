@@ -10,17 +10,18 @@ import { loggedtoTrue } from "@/store/slices/logedSlice";
 export default function ReduxVarsDefaultValueSetter(props) {
     
     
+    console.log('props',props);
     // ! deghat kon ke dari inja to headers miay set mikoni maghadri defaulti ro.
 
     const dispatch = useDispatch();
 
-    dispatch(setUserImageValue(props.data.user_image));
+    dispatch(setUserImageValue(props?.data.user_image));
     
-    {props.data.user_is_active ? dispatch(userIsActivetoTrue):null}
+    {props?.data.user_is_active ? dispatch(userIsActivetoTrue):null}
     
-    dispatch(setRoleVlaue(props.data.role));
+    dispatch(setRoleVlaue(props?.data.role));
 
-    {props.data.loged ? dispatch(loggedtoTrue):null}
+    {props?.data.loged ? dispatch(loggedtoTrue):null}
     
 
     

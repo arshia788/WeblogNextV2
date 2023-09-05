@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
               <div className='flex flex-col gap-12'>
                 <Header />
 
-                <div className='container mx-auto '>
+                <div className='container mx-auto'>
                   {children}
                   <Footer />
                 </div>

@@ -10,14 +10,12 @@ export default function Posts({params}) {
   const [details,setDetails]= useState( <Followings /> );
 
   useEffect(()=>{
-
     if(params.slug[0] === 'followings'){
       setDetails(<Followings />)
     }
     else if (params.slug[0] === 'followers'){
       setDetails(<Followers />)
     }    
-
   },[])
 
 

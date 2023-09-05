@@ -2,15 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import UserMenu from "../user-menu";
 
 import {  useSelector } from "react-redux";
+import { useState } from "react";
 
 export default function LogInAndUserImage() {
 
   const logged= useSelector(store=> store.logedSlice.value); 
   const userImage= useSelector(store=> store.userImageSlice.value);
-  
-  
+
+
+  const [menuIsOpen,setMenuIsOpen]= useState(true);
+  console.log(menuIsOpen);
 
   return (
     <div>
@@ -20,9 +24,12 @@ export default function LogInAndUserImage() {
             
             :
             <Image 
+            onClick={()=>setMenuIsOpen(!menuIsOpen)}
             className="rounded-full border-2 border-blue-500 transition-all duration-300 hover:bg-blue-600"
             src={userImage} width={60} height={60} alt="test"/>
         }
+
+        <UserMenu menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen}/>
     </div>
   )
 }

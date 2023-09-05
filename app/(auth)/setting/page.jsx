@@ -19,7 +19,7 @@ const getData = async (token) => {
 export default async function Setting() {
     
     const cookieStore = cookies();
-    const token= cookieStore('token')? cookieStore('token').value :null;
+    const token= cookieStore.get('token')? cookieStore.get('token').value :undefined;
 
     const data= await getData(token);
 
