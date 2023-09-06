@@ -12,6 +12,7 @@ export async function POST(req) {
 
     try {
         connect();
+        const user_id= req.headers.get('user-id');
         const inputData = await req.json();
 
 
@@ -69,7 +70,10 @@ export async function POST(req) {
         }
 
         const usernameFound = await User.findOne({ username: inputData.username });
-        if (usernameFound) {
+        
+
+        // ? yani inja yek nafar dg in esme ro dareh chon id ha yeki nist. 
+        if (usernameFound._id !== user_id) {
             return NextResponse.json(
                 { data: '  لطفا نام کاربری دیگری انتخاب بکنید' },
                 { status: 402 }
@@ -77,7 +81,7 @@ export async function POST(req) {
         }
 
         const blog_nameFound = await User.findOne({ blog_name: inputData.blog_name });
-        if (blog_nameFound) {
+        if (blog_nameFound !== user_id) {
             return NextResponse.json(
                 { data: '  لطفا نام وبلاگ دیگری انتخاب بکنید' },
                 { status: 402 }
