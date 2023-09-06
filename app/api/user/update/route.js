@@ -11,7 +11,7 @@ export async function POST(req) {
         connect();
 
         const user_id = req.headers.get('user-id');
-        
+
         console.log('userId----',user_id);
 
         const inputData = await req.json();
@@ -94,15 +94,14 @@ export async function POST(req) {
 
 
         
-        console.log(newData);
         
 
 
-        // // ? omadi on userId ro update kardi 
-        // const userData = await User.findById(user_id, newData, { new: true });
+        // ? omadi on userId ro update kardi 
+        await User.findById(user_id, newData, { new: true });
 
 
-        // return NextResponse.json({data:userData},{status:200});
+        return NextResponse.json({data:'data updated'},{status:200});
 
     } catch (error) {
         console.log(error);

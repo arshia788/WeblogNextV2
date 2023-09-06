@@ -7,12 +7,14 @@ import Link from 'next/link';
 // ? ba in omadi url site ro gerefti mesle on spash screen
 import { usePathname } from 'next/navigation';
 
-export default function LinkItem({title,link}){
+export default function LinkItem({title,link, setMenuIsOpen}){
 
   const path= usePathname();
   
   return (
-    <Link className=
+    <Link 
+    onClick={()=>setMenuIsOpen(false)}
+    className=
     {
       path === link ?
       'w-[255px] text-center text-white transition-all duration-300 hover:bg-blue-600 bg-blue-600 py-2 rounded-md'

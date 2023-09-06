@@ -13,22 +13,21 @@ export default function UpdateUserData({ token }) {
     const displaynameRef = useRef();
     const passwordRef = useRef();
 
-    // inja miad set misheh default value ha.
     const [userDefaultValue, setUserDefaultValue] = useState(false);
 
-
-    // inja omadi on data user ro gerefti.
     useEffect(() => {
 
         axios.get('/api/user/user-setting-default-items', { headers: { token } })
 
             .then(data => {
+                console.log(data);
                 setUserDefaultValue(data.data.data);
             })
 
             .catch(error => {
                 console.log(error.response.data);
             })
+
     }, [])
 
 
@@ -58,7 +57,6 @@ export default function UpdateUserData({ token }) {
 
     return (
         <div className="flex justify-center items-center ">
-            <p onClick={updater}>adoasd</p>
             <form className="flex flex-col gap-16 p-4 w-[800px]">
 
                 <button 
