@@ -13,7 +13,7 @@ export async function GET(req){
         // omadi data kar bar ro gerefti.
         // ? va fogti ba select ke chi ha ro mikhay. 
 
-        const userData= await User.findById(user_id).select({blog_name:1, username:1, displayname:1}) ;
+        const userData= await User.findById(user_id).select({blog_name:1, username:1, displayname:1, details:1}) ;
 
         return NextResponse.json({data:userData},{status:200});
         

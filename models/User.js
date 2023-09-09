@@ -14,6 +14,11 @@ const userSchema= new Schema({
     displayname:{
         type:String,
         required:true
+    },
+    details:{
+        type:String,
+        required:true,
+        default:'',
     }
     ,password:{
         type:String,

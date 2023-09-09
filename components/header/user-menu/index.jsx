@@ -10,6 +10,7 @@ export default function UserMenu({ menuIsOpen, setMenuIsOpen }) {
         <div className={
             menuIsOpen ? 
             'w-[320px] h-[100vh] backdrop-blur-sm bg-[#000000cc] fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center transition-all duration-300'
+            
             :
             'w-[320px] h-[100vh] backdrop-blur-sm bg-[#000000cc] fixed top-0 bottom-0 -left-[320px] -right-[100%] flex justify-center items-center transition-all duration-300'            
         }

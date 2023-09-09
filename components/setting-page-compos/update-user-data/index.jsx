@@ -5,6 +5,10 @@ import { useEffect, useRef, useState } from "react";
 
 import { ThreeDots } from "react-loader-spinner";
 
+// toast---
+import { toast } from 'react-toastify';
+
+
 export default function UpdateUserData({ token }) {
 
     console.log(token);
@@ -12,6 +16,7 @@ export default function UpdateUserData({ token }) {
     const blog_nameRef = useRef();
     const displaynameRef = useRef();
     const passwordRef = useRef();
+    const detailsRef = useRef();
 
     const [userDefaultValue, setUserDefaultValue] = useState(false);
 
@@ -31,37 +36,228 @@ export default function UpdateUserData({ token }) {
     }, [])
 
 
-    const updater = (e) => {
-        e.preventDefault()
-        const formData={
-            username:usernameRef.current.value ===""? undefined :usernameRef.current.value,
+    const usernameupdater = (e) => {
+        e.preventDefault();
 
-            blog_name:blog_nameRef.current.value ===""? undefined :blog_nameRef.current.value,
 
-            displayname:displaynameRef.current.value ===""? undefined :displaynameRef.current.value,
+        const formData = {
+            username: usernameRef.current.value === "" ? undefined : usernameRef.current.value,
 
-            password:passwordRef.current.value===""? undefined :passwordRef.current.value ,
-        }
+            blog_name: blog_nameRef.current.value === "" ? undefined : blog_nameRef.current.value,
 
-        // mogeh darkhast omadi in token ro ham behesh dadi. 
-        axios.post('/api/user/update',formData, { headers: { token } })
+            displayname: displaynameRef.current.value === "" ? undefined : displaynameRef.current.value,
+
+            password: passwordRef.current.value === "" ? undefined : passwordRef.current.value,
+        };
+
+        axios.post('/api/user/update', formData, { headers: { token } })
+            .then(data => {
+                toast.success(" به روز رسانی با موفقیت انجام شد", {
+                    autoClose: 3000,
+
+                    hideProgressBar: false,
+
+                    closeOnClick: true,
+
+                    pauseOnHover: true,
+
+                    draggable: true,
+
+                    progress: undefined,
+                })
+            })
+
+            .catch(error => {
+                const message = error.response.data ? error.response.data : "خطا"
+                toast.success(message, {
+                    autoClose: 3000,
+
+                    hideProgressBar: false,
+
+                    closeOnClick: true,
+
+                    pauseOnHover: true,
+
+                    draggable: true,
+
+                    progress: undefined,
+                })
+
+            })
+    };
+
+    const blognameupdater = (e) => {
+        e.preventDefault();
+
+
+        const formData = {
+            blog_name: blog_nameRef.current.value === "" ? undefined : blog_nameRef.current.value,
+
+        };
+
+        axios.post('/api/user/update', formData, { headers: { token } })
+            .then(data => {
+                toast.success(" به روز رسانی با موفقیت انجام شد", {
+                    autoClose: 3000,
+
+                    hideProgressBar: false,
+
+                    closeOnClick: true,
+
+                    pauseOnHover: true,
+
+                    draggable: true,
+
+                    progress: undefined,
+                })
+            })
+
+            .catch(error => {
+                const message = error.response.data ? error.response.data : "خطا"
+                toast.success(message, {
+                    autoClose: 3000,
+
+                    hideProgressBar: false,
+
+                    closeOnClick: true,
+
+                    pauseOnHover: true,
+
+                    draggable: true,
+
+                    progress: undefined,
+                })
+            })
+    };
+
+    const displaynameupdater = (e) => {
+        e.preventDefault();
+
+
+        const formData = {
+            username: usernameRef.current.value === "" ? undefined : usernameRef.current.value,
+
+            blog_name: blog_nameRef.current.value === "" ? undefined : blog_nameRef.current.value,
+
+            displayname: displaynameRef.current.value === "" ? undefined : displaynameRef.current.value,
+
+            password: passwordRef.current.value === "" ? undefined : passwordRef.current.value,
+        };
+
+        axios.post('/api/user/update', formData, { headers: { token } })
             .then(data => {
                 console.log(data.data);
             })
 
             .catch(error => {
-                console.log(error.response.data);
+                const message = error.response.data ? error.response.data : "خطا"
+                toast.success(message, {
+                    autoClose: 3000,
+
+                    hideProgressBar: false,
+
+                    closeOnClick: true,
+
+                    pauseOnHover: true,
+
+                    draggable: true,
+
+                    progress: undefined,
+                })
             })
-    }
+    };
+
+    const detailsupdater = (e) => {
+        e.preventDefault();
+
+
+        const formData = {
+            details: detailsRef.current.value === "" ? undefined : detailsRef.current.value,
+
+        };
+
+        axios.post('/api/user/update', formData, { headers: { token } })
+            .then(data => {
+                toast.success(" به روز رسانی با موفقیت انجام شد", {
+                    autoClose: 3000,
+
+                    hideProgressBar: false,
+
+                    closeOnClick: true,
+
+                    pauseOnHover: true,
+
+                    draggable: true,
+
+                    progress: undefined,
+                })
+
+            })
+
+            .catch(error => {
+                const message = error.response.data ? error.response.data : "خطا"
+                toast.success(message, {
+                    autoClose: 3000,
+
+                    hideProgressBar: false,
+
+                    closeOnClick: true,
+
+                    pauseOnHover: true,
+
+                    draggable: true,
+
+                    progress: undefined,
+                })
+            })
+    };
+
+    const passwordupdater = (e) => {
+        e.preventDefault();
+
+
+        const formData = {
+            password: passwordRef.current.value === "" ? undefined : passwordRef.current.value,
+        };
+
+        axios.post('/api/user/update', formData, { headers: { token } })
+            .then(data => {
+                toast.success(" به روز رسانی با موفقیت انجام شد", {
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+            })
+
+            .catch(error => {
+                const message = error.response.data ? error.response.data : "خطا"
+                toast.success(message, {
+                    autoClose: 3000,
+
+                    hideProgressBar: false,
+
+                    closeOnClick: true,
+
+                    pauseOnHover: true,
+
+                    draggable: true,
+
+                    progress: undefined,
+                })
+            })
+    };
+
+
 
 
     return (
         <div className="flex justify-center items-center ">
-            <form className="flex flex-col gap-16 p-4 w-[800px]">
+            <form className="flex flex-col gap-20 p-4 w-[800px]">
 
-                <button 
-                type="submit"
-                onClick={updater} className="fixed top-40 left-10 bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded">آپدیت</button>
+
                 {
                     !userDefaultValue ?
                         <ThreeDots
@@ -78,46 +274,108 @@ export default function UpdateUserData({ token }) {
                         <div className="flex flex-col gap-12">
                             <div className="flex flex-col gap-1">
                                 <div> نام کاربری جدید </div>
-                                <input
-                                    
-                                    // ? defaultValue mishe on meghdari ke dar halat adi hast
 
-                                    defaultValue={userDefaultValue.username}
-                                    ref={usernameRef}
-                                    type="text" placeholder="نام کاربری جدید"
-                                    className='border-2 border-zinc-200 rounded-md p-2 outline-none focus:border-blue-500 w-full'
-                                />
+                                <div className="flex justify-between items-center gap-2">
+
+                                    <input
+                                        // ? defaultValue mishe on meghdari ke dar halat adi hast
+
+                                        defaultValue={userDefaultValue.username}
+                                        ref={usernameRef}
+                                        type="text" placeholder="نام کاربری جدید"
+                                        className='border-b-2 border-zinc-200  p-2 outline-none focus:border-blue-500 w-full'
+                                    />
+
+                                    <button
+                                        onClick={usernameupdater} className="bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded w-20 min-w-20 h-10 flex justify-center items-center">آپدیت</button>
+
+
+                                </div>
                             </div>
 
 
                             <div className="flex flex-col gap-1">
                                 <div>نام وبلاگ جدید</div>
-                                <input
-                                defaultValue={userDefaultValue.blog_name}
-                                    ref={blog_nameRef}
-                                    type="text" placeholder="نام وبلاگ جدید"
-                                    className='border-2 border-zinc-200 rounded-md p-2 outline-none focus:border-blue-500 w-full'
-                                />
+
+                                <div className="flex justify-between items-center gap-2">
+
+                                    <input
+                                        // ? defaultValue mishe on meghdari ke dar halat adi hast
+
+                                        defaultValue={userDefaultValue.blog_name}
+                                        ref={blog_nameRef}
+                                        type="text" placeholder="نام وبلاگ جدید"
+                                        className='border-b-2 border-zinc-200  p-2 outline-none focus:border-blue-500 w-full'
+                                    />
+
+                                    <button
+                                        onClick={blognameupdater} className="bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded w-20 min-w-20 h-10 flex justify-center items-center">آپدیت</button>
+
+
+                                </div>
+
                             </div>
 
                             <div className="flex flex-col gap-1">
                                 <div> نام نمایشی جدید </div>
-                                <input
-                                defaultValue={userDefaultValue.displayname}
-                                    ref={displaynameRef}
-                                    type="text" placeholder="نام نمایشی جدید"
-                                    className='border-2 border-zinc-200 rounded-md p-2 outline-none focus:border-blue-500 w-full'
-                                />
+                                <div className="flex justify-between items-center gap-2">
+
+                                    <input
+                                        // ? defaultValue mishe on meghdari ke dar halat adi hast
+
+                                        defaultValue={userDefaultValue.displayname}
+                                        ref={displaynameRef}
+                                        type="text" placeholder="نام نمایشی جدید"
+                                        className='border-b-2 border-zinc-200  p-2 outline-none focus:border-blue-500 w-full'
+                                    />
+
+                                    <button
+                                        onClick={displaynameupdater} className="bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded w-20 min-w-20 h-10 flex justify-center items-center">آپدیت</button>
+
+
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <div>   درباره وبلاگ </div>
+                                <div className="flex justify-between items-center gap-2">
+
+                                    <input
+                                        // ? defaultValue mishe on meghdari ke dar halat adi hast
+
+                                        defaultValue={userDefaultValue.details}
+                                        ref={detailsRef}
+                                        type="text" placeholder="نام کاربری جدید"
+                                        className='border-b-2 border-zinc-200 rounded-md p-2 outline-none focus:border-b-blue-500 w-full'
+                                    />
+
+                                    <button
+                                        onClick={detailsupdater} className="bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded w-20 min-w-20 h-10 flex justify-center items-center">آپدیت</button>
+
+
+                                </div>
                             </div>
 
                             <div className="flex flex-col gap-1">
                                 <div> رمز عبور جدید </div>
-                                <input
-                                    ref={passwordRef}
-                                    type="text" placeholder="رمز عبور جدید"
-                                    className='border-2 border-zinc-200 rounded-md p-2 outline-none focus:border-blue-500 w-full'
-                                />
+                                <div className="flex justify-between items-center gap-2">
+
+                                    <input
+                                        // ? defaultValue mishe on meghdari ke dar halat adi hast
+
+                                        defaultValue={userDefaultValue.password}
+                                        ref={passwordRef}
+                                        type="text" placeholder="نام کاربری جدید"
+                                        className='border-b-2 border-zinc-200 rounded-md p-2 outline-none focus:border-b-blue-500 w-full'
+                                    />
+
+                                    <button
+                                        onClick={passwordupdater} className="bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded w-20 min-w-20 h-10 flex justify-center items-center">آپدیت</button>
+
+
+                                </div>
                             </div>
+
                         </div>
 
                 }
