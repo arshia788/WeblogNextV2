@@ -10,9 +10,18 @@ import { ThreeDots } from "react-loader-spinner";
 import { toast } from 'react-toastify';
 
 
+// redux--
+import { useDispatch, useSelector } from "react-redux";
+
+// redux actions---
+import { setUserImageValue } from "@/store/slices/userImageSlice";
+
+
+
 export default function UpdateUserData({ token }) {
 
-    console.log(token);
+    const dispatch= useDispatch();
+
     const usernameRef = useRef();
     const blog_nameRef = useRef();
     const displaynameRef = useRef();
@@ -20,13 +29,16 @@ export default function UpdateUserData({ token }) {
     const detailsRef = useRef();
 
     const [userDefaultValue, setUserDefaultValue] = useState(false);
+    const [imageNmae, setImageName] = useState('');
+    const [userDefValuesReloader, setUserDefValuesReloader]= useState(false);
+
 
     useEffect(() => {
 
         axios.get('/api/user/user-setting-default-items', { headers: { token } })
 
             .then(data => {
-                console.log(data);
+                dispatch(setUserImageValue(data.data.data.image))
                 setUserDefaultValue(data.data.data);
             })
 
@@ -34,7 +46,7 @@ export default function UpdateUserData({ token }) {
                 console.log(error.response.data);
             })
 
-    }, [])
+    }, [userDefValuesReloader])
 
 
     const usernameupdater = (e) => {
@@ -43,12 +55,6 @@ export default function UpdateUserData({ token }) {
 
         const formData = {
             username: usernameRef.current.value === "" ? undefined : usernameRef.current.value,
-
-            blog_name: blog_nameRef.current.value === "" ? undefined : blog_nameRef.current.value,
-
-            displayname: displaynameRef.current.value === "" ? undefined : displaynameRef.current.value,
-
-            password: passwordRef.current.value === "" ? undefined : passwordRef.current.value,
         };
 
         axios.post('/api/user/update', formData, { headers: { token } })
@@ -136,13 +142,8 @@ export default function UpdateUserData({ token }) {
 
 
         const formData = {
-            username: usernameRef.current.value === "" ? undefined : usernameRef.current.value,
-
-            blog_name: blog_nameRef.current.value === "" ? undefined : blog_nameRef.current.value,
-
             displayname: displaynameRef.current.value === "" ? undefined : displaynameRef.current.value,
 
-            password: passwordRef.current.value === "" ? undefined : passwordRef.current.value,
         };
 
         axios.post('/api/user/update', formData, { headers: { token } })
@@ -256,6 +257,8 @@ export default function UpdateUserData({ token }) {
 
         axios.post('/api/user/update-user-image', e.target, { headers: { token } })
             .then(data => {
+
+                setUserDefValuesReloader(!userDefaultValue)
                 toast.success(" به روز رسانی با موفقیت انجام شد", {
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -313,21 +316,26 @@ export default function UpdateUserData({ token }) {
                                 <div className="flex justify-between items-center gap-2">
 
                                     <form
-                                    onSubmit={imageupdater}
-                                    className="flex justify-start items-center gap-4">
+                                        onSubmit={imageupdater}
+                                        className="flex justify-start items-center gap-4">
 
-                                        <Image alt="user image"
-                                            width={80}
-                                            height={80}
-                                            src={userDefaultValue.image !== "" ? userDefaultValue.image : userDefaultValue.default_image}
-                                            className="rounded-full"
-                                        />
+                                        <div className="w-32 h-32 relative">
+
+                                            <Image alt="user image"
+                                                fill
+                                                src={userDefaultValue.image !== '' ? userDefaultValue.image : userDefaultValue.default_image}
+                                                className="object-cover rounded-full"
+                                            />
+                                        </div>
+
                                         <div className="w-32 h-24 flex justify-center items-center">
 
                                             <input
-                                                // ? defaultValue mishe on meghdari ke dar halat adi hast
-                                                defaultValue={userDefaultValue.username}
-                                                ref={usernameRef}
+
+                                                // *inja miay az bakhaseh files estefadeh mikoni. 
+                                                onChange={(e) => {
+                                                    setImageName(e.target.files[0].name);
+                                                }}
                                                 type="file"
                                                 id="file"
                                                 name="file"
@@ -335,10 +343,18 @@ export default function UpdateUserData({ token }) {
                                             />
 
                                             <div className="w-32 h-32 flex justify-center items-center gap-2">
-                                                <label className="
+
+                                                {/* inja omadi esme ro gofti ke agar chizi gozasht biad emse image ro neshon bedeh. */}
+
+                                                <label className=" line-clamp-1
                                                 w-32 min-w-32
-                                                bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded h-10 flex justify-center items-center cursor-pointer" htmlFor="file">
-                                                    انتخاب عکس
+                                                bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded h-8 flex justify-center items-center cursor-pointer" htmlFor="file">
+                                                    {
+                                                        imageNmae === ''
+                                                            ? 'انتخاب عکس'
+                                                            :
+                                                            imageNmae
+                                                    }
                                                 </label>
                                             </div>
 

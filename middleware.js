@@ -19,7 +19,6 @@ export async function middleware(req) {
          const token = req.headers.get("token");
 
          const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.TOKEN_SECRET));
-         console.log(payload);
 
          const response = NextResponse.next()
 

@@ -48,7 +48,9 @@ export async function POST(req) {
             // in alan hamoon karbareh hast.
             const usernameFound= await User.findOne({username:inputData.username})
 
-            // *baray in be bug khordi chon shayad karbari nabashe ba in username pas miay be error mikhori baray hamin omadi gofti agar bashe ya id on esme ba id dar khast konandeh yeki nabasheh bia in kar ro bokon. 
+            // *baray in be bug khordi chon shayad karbari nabashe ba in username pas miay be error mikhori baray hamin omadi gofti agar nabashe ya id on esme ba id dar khast konandeh yeki nabasheh bia in kar ro bokon.
+            
+            // ? hala che on esme ya id fargh dashteh basheh miad in error ri mideh.
             
             if(!usernameFound || usernameFound._id === user_id){
                 const newUsername = inputData.username.replace(/\s+/g, '-').toLowerCase();
@@ -113,6 +115,7 @@ export async function POST(req) {
 
 
 
+        // * displayname
         if (inputData.displayname !== undefined) {
 
             console.log(inputData.displayname);

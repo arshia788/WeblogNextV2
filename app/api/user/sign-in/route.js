@@ -71,7 +71,7 @@ export async function POST(req){
         const send_data={
             role:foundPhone.role,
             user_is_active:foundPhone.user_is_active,
-            user_image:foundPhone.default_image,
+            user_image:foundPhone.image !== '' ?foundPhone.image :foundPhone.default_image,
             blog_slug:foundPhone.username
         }
 

@@ -1,68 +1,67 @@
-import { NextResponse } from "next/server";
+import User from "@/model/User";
 import connect from "@/utils/connect";
-import User from "@/models/User";
-
-import {existsSync} from 'fs';
-import fs from 'fs/promises';
+import { NextResponse } from "next/server";
+import { existsSync } from "fs";
+import fs from "fs/promises";
 import path from "path";
+
+
 
 export async function POST(req) {
 
-    try {
-        connect();
+   try {
+      connect();
 
-        const user_id= await req.headers.get('user-id')
-        
+      const formData = await req.formData();
 
-        const formData= await req.formData();
-        
-        const file= formData.get('file');
+      const file = formData.get("file");
+      if (!file) {
+         return NextResponse.json({}, { status: 400 });
+      }
+      if (file.size < 1) {
+         return NextResponse.json({ data: "لطفا فایلی را انتخاب کنید" }, { status: 400 });
+      }
+      if (file.size > 2000000) {
+         return NextResponse.json({ data: "حجم فایل باید کمتر از 2 مگ باشد" }, { status: 400 });
+      }
 
-        if(!file){
+    //   in ham baray type on file hast 
+      if (file.type!="image/jpeg" && file.type!="image/jpg" && file.type!='image/png' ) {
+         return NextResponse.json({ data: "لطفا فایل png یا jpeg آپلود کنید." }, { status: 400 });
+      }
+      
 
-        }
-        if(file.size > 1){
-
-        }
-
-        if(file.size > 1){
-
-        }
-
-        const fileDestination= path.join(process.cwd(), "public/uploads")
-        const fileArrayBuffer= await file.arrayBuffer();
+      const destinationDirPath = path.join(process.cwd(), "public/uploads/avatars");
+      const fileArrayBuffer = await file.arrayBuffer();
 
 
-        if(!existsSync(fileDestination)){
-            fs.mkdir(fileDestination,{recursive:true})    
-        }
+      if (!existsSync(destinationDirPath)) {
+         fs.mkdir(destinationDirPath, { recursive: true });
+      }
 
-        const fileName= Date.now()+ file.name;
-        const fileUrl= fileDestination + '/'+fileName
 
-        await fs.writeFile(
-            path.join(fileDestination, fileName),
-            Buffer.from(fileArrayBuffer)
-        )
+      const newname = Date.now() + file.name;
 
-        const newData={
-            image:fileUrl
-        }
+        // inja omadi faght gofti uploads chon niazi be goftan public nist  
+      const fileUrl = "/uploads/" + newname;
 
-        await User.findByIdAndUpdate(user_id, newData ,{new:true})
+      await fs.writeFile(
+         path.join(destinationDirPath, newname),
+         Buffer.from(fileArrayBuffer)
+      );
 
-        
-        return NextResponse.json({data:"تصویر به روز رسانی شد"}, {status:200})
-        
-        
-    } catch (error) {
-        console.log(error);
-        return NextResponse.json({ data: "failed" }, { status: 401 });
+      const newData={
+         image:fileUrl
+      }
+      const user_id = req.headers.get("user-id");
+      await User.findByIdAndUpdate(user_id, newData, { new: true })
 
-    }
+      return NextResponse.json({ data: "تصویر به روزرسانی شد." }, { status: 200 });
+
+     
+   } catch (error) {
+      console.log(error);
+      return NextResponse.json({ data: "خطا ", }, { status: 401 });
+   }
 
 }
-
-
-
-
