@@ -12,7 +12,8 @@ export async function middleware(req) {
       path == "/api/user/user-setting-default-items"||
 
       // inja omadi gofti ke biad on token ro be in api ham bedeh. 
-      path == "/api/user/update"
+      path == "/api/user/update" ||
+      path == '/api/user/update-user-image' 
    ) {
       try {
          const token = req.headers.get("token");

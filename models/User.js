@@ -40,10 +40,13 @@ const userSchema= new Schema({
     default_image:{
         type:String,
         required:true
-    }
+    },
 
-
-    ,role:{
+    image:{
+        type:String,
+        default: ""
+    },
+    role:{
         type:Number,
         required:true,
 
@@ -51,7 +54,6 @@ const userSchema= new Schema({
         default:3
     }
     ,
-
     // in active code vase taid karbar hast. 
 
     active_code:{

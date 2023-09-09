@@ -1,6 +1,7 @@
 'use client';
 
 import axios from "axios";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import { ThreeDots } from "react-loader-spinner";
@@ -250,6 +251,39 @@ export default function UpdateUserData({ token }) {
             })
     };
 
+    const imageupdater = (e) => {
+        e.preventDefault();
+
+        axios.post('/api/user/update-user-image', e.target, { headers: { token } })
+            .then(data => {
+                toast.success(" به روز رسانی با موفقیت انجام شد", {
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                })
+            })
+
+            .catch(error => {
+                const message = error.response.data ? error.response.data : "خطا"
+                toast.success(message, {
+                    autoClose: 3000,
+
+                    hideProgressBar: false,
+
+                    closeOnClick: true,
+
+                    pauseOnHover: true,
+
+                    draggable: true,
+
+                    progress: undefined,
+                })
+            })
+    };
+
 
 
 
@@ -272,6 +306,55 @@ export default function UpdateUserData({ token }) {
                         />
                         :
                         <div className="flex flex-col gap-12">
+
+                            <div className="flex flex-col gap-1">
+                                <div> تصویر وبلاگ </div>
+
+                                <div className="flex justify-between items-center gap-2">
+
+                                    <form
+                                    onSubmit={imageupdater}
+                                    className="flex justify-start items-center gap-4">
+
+                                        <Image alt="user image"
+                                            width={80}
+                                            height={80}
+                                            src={userDefaultValue.image !== "" ? userDefaultValue.image : userDefaultValue.default_image}
+                                            className="rounded-full"
+                                        />
+                                        <div className="w-32 h-24 flex justify-center items-center">
+
+                                            <input
+                                                // ? defaultValue mishe on meghdari ke dar halat adi hast
+                                                defaultValue={userDefaultValue.username}
+                                                ref={usernameRef}
+                                                type="file"
+                                                id="file"
+                                                name="file"
+                                                hidden
+                                            />
+
+                                            <div className="w-32 h-32 flex justify-center items-center gap-2">
+                                                <label className="
+                                                w-32 min-w-32
+                                                bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded h-10 flex justify-center items-center cursor-pointer" htmlFor="file">
+                                                    انتخاب عکس
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type='submit'
+                                            className="bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600 px-3 py-2 rounded w-24 min-w-24 h-10 flex justify-center items-center">ذخیره عکس
+                                        </button>
+
+                                    </form>
+
+                                </div>
+                            </div>
+
                             <div className="flex flex-col gap-1">
                                 <div> نام کاربری جدید </div>
 

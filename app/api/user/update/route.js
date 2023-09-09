@@ -123,10 +123,7 @@ export async function POST(req) {
         };
 
 
-
-
         // !Password
-        
         if (inputData.password !== undefined) {
             if (inputData.password.length < 8 || inputData.password.length > 24) {
                 return NextResponse.json({ data: "نام کاربری باید بین 8 تا 24 کارکتر باشد" }, { status: 402 });
