@@ -37,7 +37,6 @@ export async function POST(req) {
          fs.mkdir(destinationDirPath, { recursive: true });
       }
 
-
       const newname = Date.now() + file.name;
       const fileUrl = "/uploads/avatars/" + newname;
 

@@ -27,7 +27,11 @@ const UpdateUserData = ({ token }) => {
          , { headers: { token: token } }
       )
          .then(d => {
+
+            // vaghti miay sign-up mikoni sar img be moshkel mikhori chon axi karbar hanooz entekhab nakardeh pas miay inja migi ke har kodom ke bod.
+            
             dispatch(setuserImageValue(d.data.data.image != "" ? d.data.data.image : d.data.data.default_image));
+
             setuserDefValues(d.data.data);
          })
          .catch(error => {

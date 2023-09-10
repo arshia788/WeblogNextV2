@@ -1,11 +1,33 @@
-import Link from 'next/link';
-import React from 'react';
-import LinkItem
- from './link-item';
+'use client';
 
-import {IoMdClose} from 'react-icons/io'
+import React, { useState, useEffect } from 'react';
+import LinkItem from './link-item';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+import {IoMdClose} from 'react-icons/io';
+
+// redux---
+import { useDispatch } from 'react-redux';
+
+// redux-actions---
+import { setuserImageValue } from '@/store/slices/userImageSlice';
+import { userIsActivetoFalse } from '@/store/slices/user-is-active';
+import { loggedtoFalse } from '@/store/slices/logedSlice';
+import { setRoleValue } from '@/store/slices/roleSlice';
+
 
 export default function UserMenu({ menuIsOpen, setMenuIsOpen }) {
+
+    const [logoutManager,setLogoutManager]= useState(false);
+    const dispatch= useDispatch();
+    const router= useRouter();
+
+    useEffect(()=>{
+
+        if(logoutManager) router.push('/sign-in')
+
+    },[logoutManager])
+
     return (
         <div className={
             menuIsOpen ? 
@@ -30,6 +52,25 @@ export default function UserMenu({ menuIsOpen, setMenuIsOpen }) {
                 <LinkItem setMenuIsOpen={setMenuIsOpen} title="در انتظار تایید مدیر" link="/my-posts/waiting" />
                 <LinkItem setMenuIsOpen={setMenuIsOpen} title="پست های بوک مارک شده" link="/my-posts/bookmarked" />
                 <LinkItem setMenuIsOpen={setMenuIsOpen} title="پست های لایک شده" link="/my-posts/liked" />        
+                
+                <button 
+
+                onClick={()=>{
+
+                    // injori omadi on token ro hazaf kardi. 
+                    Cookies.set('token', '', {expires:0}),
+
+                    // ! chon dari logout mikoni pas bayad in redux ro daobareh dorost bokoni. 
+                    setLogoutManager(logoutManager)
+
+                    dispatch(setuserImageValue('https://secure.gravatar.com/avatar/username?s=60&d=identicon'))
+
+                    dispatch(userIsActivetoFalse());
+                    dispatch(setRoleValue(4));
+                    dispatch(loggedtoFalse());
+                }}
+
+                className='w-[255px] text-center text-white transition-all duration-300 hover:bg-blue-600 bg-blue-600 py-2 rounded-md'>خروج</button>
             </div>
             <IoMdClose 
             onClick={()=>setMenuIsOpen(!menuIsOpen)}
