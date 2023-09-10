@@ -2,12 +2,10 @@
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { setUserImageValue } from "@/store/slices/userImageSlice";
+import { setuserImageValue } from "@/store/slices/userImageSlice";
 import { userIsActivetoTrue } from "@/store/slices/user-is-active";
-import { setRoleVlaue } from "@/store/slices/roleSlice";
 import { loggedtoTrue } from "@/store/slices/logedSlice";
-
-import userImageSlice from "@/store/slices/userImageSlice";
+import { setRoleValue } from "@/store/slices/roleSlice";
 
 export default function ReduxVarsDefaultValueSetter(props) {
 
@@ -17,11 +15,11 @@ export default function ReduxVarsDefaultValueSetter(props) {
 
     const dispatch = useDispatch();
 
-    dispatch(setUserImageValue(props.data.user_image));
+    dispatch(setuserImageValue(props.data.user_image));
     
     {props.data.user_is_active ? dispatch(userIsActivetoTrue):null}
     
-    dispatch(setRoleVlaue(props.data.role));
+    dispatch(setRoleValue(props.data.role));
 
     {props.data.loged ? dispatch(loggedtoTrue()):null}
     

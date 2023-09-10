@@ -1,28 +1,27 @@
-'use client';
-
+"use client"
 import { useEffect, useState } from "react";
 
 import Followers from "@/components/follow/followers";
 import Followings from "@/components/follow/followings";
 
-export default function Posts({params}) {
+const Posts = ({params}) => {
+   const [details,setdetails]=useState(<Followings/>);
 
-  const [details,setDetails]= useState( <Followings /> );
-
-  useEffect(()=>{
-    if(params.slug[0] === 'followings'){
-      setDetails(<Followings />)
-    }
-    else if (params.slug[0] === 'followers'){
-      setDetails(<Followers />)
-    }    
-    
-  },[params.slug[0]])
+   useEffect(()=>{
+      if(params.slug[0]=="followings"){
+         setdetails(<Followings/>);
+      }
+      else if(params.slug[0]=="followers"){
+         setdetails(<Followers/>);
+      }
+   },[params.slug[0]]);
 
 
-  return (
-    <div className="mt-[90px]">
-      {details}
-    </div>
-  )
+   return (
+      <div>
+         {details}
+      </div>
+   );
 }
+
+export default Posts;

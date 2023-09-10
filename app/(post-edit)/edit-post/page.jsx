@@ -1,7 +1,9 @@
-import React from 'react'
-
-export default function EditPost() {
-  return (
-    <div>EditPost</div>
-  )
+const EditPost = () => {
+   return (
+      <div>
+         edit post
+      </div>
+   );
 }
+
+export default EditPost;

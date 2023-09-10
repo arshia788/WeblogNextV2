@@ -1,4 +1,4 @@
-import User from "@/model/User";
+import User from "@/models/User";
 import connect from "@/utils/connect";
 import { NextResponse } from "next/server";
 import { existsSync } from "fs";
@@ -24,8 +24,6 @@ export async function POST(req) {
       if (file.size > 2000000) {
          return NextResponse.json({ data: "حجم فایل باید کمتر از 2 مگ باشد" }, { status: 400 });
       }
-
-    //   in ham baray type on file hast 
       if (file.type!="image/jpeg" && file.type!="image/jpg" && file.type!='image/png' ) {
          return NextResponse.json({ data: "لطفا فایل png یا jpeg آپلود کنید." }, { status: 400 });
       }
@@ -41,9 +39,7 @@ export async function POST(req) {
 
 
       const newname = Date.now() + file.name;
-
-        // inja omadi faght gofti uploads chon niazi be goftan public nist  
-      const fileUrl = "/uploads/" + newname;
+      const fileUrl = "/uploads/avatars/" + newname;
 
       await fs.writeFile(
          path.join(destinationDirPath, newname),
