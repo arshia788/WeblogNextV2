@@ -2,6 +2,7 @@ import User from "@/model/User";
 import connect from "@/utils/connect";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+
 import Jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 

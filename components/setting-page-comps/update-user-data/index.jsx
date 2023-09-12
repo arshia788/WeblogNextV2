@@ -16,20 +16,21 @@ const UpdateUserData = ({ token }) => {
    const displaynameRef = useRef();
    const detailsRef = useRef();
    const passwordRef = useRef();
+   const phoneRef = useRef();
 
 
    const [userDefValues, setuserDefValues] = useState(-1);
-
    const [userdefvaluesReloader, setuserdefvaluesReloader] = useState(-1);
-   
+   const [imagename, setimagename] = useState("");
+
+
    useEffect(() => {
       axios.get("/api/user/user-setting-default-items"
          , { headers: { token: token } }
       )
          .then(d => {
 
-            // vaghti miay sign-up mikoni sar img be moshkel mikhori chon axi karbar hanooz entekhab nakardeh pas miay inja migi ke har kodom ke bod.
-            
+
             dispatch(setuserImageValue(d.data.data.image != "" ? d.data.data.image : d.data.data.default_image));
 
             setuserDefValues(d.data.data);
@@ -38,6 +39,68 @@ const UpdateUserData = ({ token }) => {
             console.log(error.response.data);
          })
    }, [userdefvaluesReloader]);
+
+
+   const sms_sender = () => {
+      const formData = {}
+      axios.get("/api/user/sms/send-phone-confirm-sms", formData
+         , { headers: { token: token } }
+      )
+         .then(d => {
+            toast.success("به روزرسانی با موفقیت انجام شد.", {
+               autoClose: 3000,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: true,
+               draggable: true,
+               progress: undefined,
+            });
+         })
+         .catch(error => {
+            const message = error.response.data ? error.response.data.data : "خطا در فرایند به روزرسانی";
+            toast.error(message, {
+               autoClose: 3000,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: true,
+               draggable: true,
+               progress: undefined,
+            });
+         })
+   };
+
+
+
+   const phoneConfirmer = (e) => {
+      e.preventDefault();
+      const formData = {
+         username: usernameRef.current.value == "" ? undefined : usernameRef.current.value,
+      }
+      axios.post("/api/user/update", formData
+         , { headers: { token: token } }
+      )
+         .then(d => {
+            toast.success("به روزرسانی با موفقیت انجام شد.", {
+               autoClose: 3000,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: true,
+               draggable: true,
+               progress: undefined,
+            });
+         })
+         .catch(error => {
+            const message = error.response.data ? error.response.data.data : "خطا در فرایند به روزرسانی";
+            toast.error(message, {
+               autoClose: 3000,
+               hideProgressBar: false,
+               closeOnClick: true,
+               pauseOnHover: true,
+               draggable: true,
+               progress: undefined,
+            });
+         })
+   };
 
    const usernameupdater = (e) => {
       e.preventDefault();
@@ -193,7 +256,7 @@ const UpdateUserData = ({ token }) => {
             });
          })
    };
-   
+
    const imageupdater = (e) => {
       e.preventDefault();
       axios.post("/api/user/update-user-image", e.target
@@ -223,7 +286,6 @@ const UpdateUserData = ({ token }) => {
          })
    };
 
-   const [imagename, setimagename] = useState("");
 
 
    return (
@@ -232,13 +294,32 @@ const UpdateUserData = ({ token }) => {
 
             {
                userDefValues == -1
-                  ? 
-                  // <div className=" my-12 flex justify-center items-center">
-                  //    <Image width={120} height={120} alt="loding" src={"/loading.svg"} />
-                  // </div>
-                  <p>loading...</p>
+                  ?
+                  <div className=" my-12 flex justify-center items-center">
+                     <Image width={120} height={120} alt="loding" src={"/loading.svg"} />
+                  </div>
+                  // <p>loading...</p>
                   : <div className="flex flex-col gap-20">
-                     <div className=" flex flex-col gap-1">
+
+                     <div className=" flex flex-col gap-4">
+                        <div className="flex justify-between items-center gap-2">
+                           <div> تایید شماره همراه</div>
+                           <button onClick={sms_sender} 
+                           className="w-32 min-w-32 h-10 flex justify-center items-center rounded-md bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600">ارسال پیامک  ({userDefValues ===-1 ? "":userDefValues.active_code_number})</button>
+                        </div>
+
+                        <div className=" flex justify-between items-center gap-2">
+                           <input ref={phoneRef} type="text" placeholder="  کد تاییدی که برای شما ارسال شده را وارد کنید" className='border-b-2 border-zinc-200 p-2 outline-none focus:border-blue-500 w-full ' />
+
+                           <button onClick={sms_sender} className=" w-20 min-w-20  h-10 flex justify-center items-center rounded-md bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600">ذخیره</button>
+                        </div>
+
+
+
+
+
+
+
                         <div>تصویر وبلاگ</div>
                         <div className=" flex  justify-between items-center gap-2">
                            <form onSubmit={imageupdater} className=" w-full  flex justify-start items-center gap-4">
