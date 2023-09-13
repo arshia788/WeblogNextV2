@@ -9,9 +9,10 @@ export async function middleware(req) {
    if (
       path == "/api/user/user-setting-default-items"||
       path == "/api/user/update" ||
-      path == '/api/user/update-user-image' ||
-      path == '/api/user/sms/send-phone-confirm-sms' 
-   ) {
+      path == '/api/user/update-user-image'||
+      path == '/api/user/sms/send-phone-confirm-sms' ||
+      path == '/api/user/sms/confirm-phone-number'
+   ){
       try {
          const token = req.headers.get("token");
 

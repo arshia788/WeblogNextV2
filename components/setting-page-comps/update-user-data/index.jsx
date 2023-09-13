@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { setuserImageValue } from "@/store/slices/userImageSlice";
 import { useDispatch } from "react-redux";
 
+import { userIsActivetoTrue } from "@/store/slices/user-is-active";
 
 const UpdateUserData = ({ token }) => {
 
@@ -42,12 +43,11 @@ const UpdateUserData = ({ token }) => {
 
 
    const sms_sender = () => {
-      const formData = {}
-      axios.get("/api/user/sms/send-phone-confirm-sms", formData
+      axios.get("/api/user/sms/send-phone-confirm-sms"
          , { headers: { token: token } }
       )
          .then(d => {
-            toast.success("به روزرسانی با موفقیت انجام شد.", {
+            toast.success("لطفا تلفن همراه را چک کنید", {
                autoClose: 3000,
                hideProgressBar: false,
                closeOnClick: true,
@@ -55,9 +55,10 @@ const UpdateUserData = ({ token }) => {
                draggable: true,
                progress: undefined,
             });
+            setuserdefvaluesReloader(userdefvaluesReloader * -1);
          })
          .catch(error => {
-            const message = error.response.data ? error.response.data.data : "خطا در فرایند به روزرسانی";
+            const message = error.response.data ? error.response.data.data : "خطا در فرایند  ارسال پیامک";
             toast.error(message, {
                autoClose: 3000,
                hideProgressBar: false,
@@ -73,14 +74,19 @@ const UpdateUserData = ({ token }) => {
 
    const phoneConfirmer = (e) => {
       e.preventDefault();
+
+      // inja omadi code ro dadi chon to back gofti code
       const formData = {
-         username: usernameRef.current.value == "" ? undefined : usernameRef.current.value,
+         code: phoneRef.current.value
       }
-      axios.post("/api/user/update", formData
+      axios.post("/api/user/sms/confirm-phone-number", formData
          , { headers: { token: token } }
       )
          .then(d => {
-            toast.success("به روزرسانی با موفقیت انجام شد.", {
+            console.log(d.data);
+            dispatch(userIsActivetoTrue())
+            setuserdefvaluesReloader(userdefvaluesReloader * -1);
+            toast.success(d.data.data, {
                autoClose: 3000,
                hideProgressBar: false,
                closeOnClick: true,
@@ -88,9 +94,11 @@ const UpdateUserData = ({ token }) => {
                draggable: true,
                progress: undefined,
             });
+
          })
          .catch(error => {
-            const message = error.response.data ? error.response.data.data : "خطا در فرایند به روزرسانی";
+            const message = error.response.data ? error.response.data.data : "کد تایید اشتباه اس";
+
             toast.error(message, {
                autoClose: 3000,
                hideProgressBar: false,
@@ -301,7 +309,10 @@ const UpdateUserData = ({ token }) => {
                   // <p>loading...</p>
                   : <div className="flex flex-col gap-20">
 
-                     <div className=" flex flex-col gap-4">
+
+                     {
+                        !userDefValues.user_is_active ? 
+                        <div className=" flex flex-col gap-4">
                         <div className="flex justify-between items-center gap-2">
                            <div> تایید شماره همراه</div>
                            <button onClick={sms_sender} 
@@ -311,15 +322,19 @@ const UpdateUserData = ({ token }) => {
                         <div className=" flex justify-between items-center gap-2">
                            <input ref={phoneRef} type="text" placeholder="  کد تاییدی که برای شما ارسال شده را وارد کنید" className='border-b-2 border-zinc-200 p-2 outline-none focus:border-blue-500 w-full ' />
 
-                           <button onClick={sms_sender} className=" w-20 min-w-20  h-10 flex justify-center items-center rounded-md bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600">ذخیره</button>
+                           <button onClick={phoneConfirmer} className=" w-20 min-w-20  h-10 flex justify-center items-center rounded-md bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600">برسی</button>
                         </div>
 
 
 
+                        </div>
+                        :
+                        <div>phone-number:{userDefValues.phone}</div>
+                     }
 
 
-
-
+                     
+                     
                         <div>تصویر وبلاگ</div>
                         <div className=" flex  justify-between items-center gap-2">
                            <form onSubmit={imageupdater} className=" w-full  flex justify-start items-center gap-4">
@@ -351,7 +366,6 @@ const UpdateUserData = ({ token }) => {
                               <button type="submit" className=" w-24 min-w-24  h-10 flex justify-center items-center rounded-md bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600">ذخیره عکس</button>
                            </form>
                         </div>
-                     </div>
                      <div className=" flex flex-col gap-1">
                         <div>نام کاربری</div>
                         <div className=" flex justify-between items-center gap-2">
