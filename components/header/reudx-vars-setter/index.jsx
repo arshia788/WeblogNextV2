@@ -6,6 +6,7 @@ import { setuserImageValue } from "@/store/slices/userImageSlice";
 import { userIsActivetoTrue } from "@/store/slices/user-is-active";
 import { loggedtoTrue } from "@/store/slices/logedSlice";
 import { setRoleValue } from "@/store/slices/roleSlice";
+import { setusernameSlice } from "@/store/slices/usernameSlice";
 
 export default function ReduxVarsDefaultValueSetter(props) {
 
@@ -16,6 +17,7 @@ export default function ReduxVarsDefaultValueSetter(props) {
     const dispatch = useDispatch();
 
     dispatch(setuserImageValue(props.data.user_image));
+    dispatch(setusernameSlice(props.data.blog_slug))
     
     {props.data.user_is_active ? dispatch(userIsActivetoTrue):null}
     

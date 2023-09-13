@@ -83,7 +83,7 @@ const UpdateUserData = ({ token }) => {
          , { headers: { token: token } }
       )
          .then(d => {
-            console.log(d.data);
+
             dispatch(userIsActivetoTrue())
             setuserdefvaluesReloader(userdefvaluesReloader * -1);
             toast.success(d.data.data, {
@@ -397,7 +397,9 @@ const UpdateUserData = ({ token }) => {
                      <div className=" flex flex-col gap-1">
                         <div>رمز عبور </div>
                         <div className=" flex justify-between items-center gap-2">
-                           <input ref={passwordRef} type="password" placeholder="رمز عبور جدید جدید" className='border-b-2 border-zinc-200 p-2 outline-none focus:border-blue-500 w-full ' />
+                           <input ref={passwordRef} type="password" placeholder="رمز عبور جدید جدید" 
+                           
+                           className='border-b-2 border-zinc-200 p-2 outline-none focus:border-blue-500 w-full ' />
                            <button onClick={passwordupdater} className=" w-20 min-w-20  h-10 flex justify-center items-center rounded-md bg-blue-500 text-white transition-all duration-300 hover:bg-blue-600">ذخیره</button>
                         </div>
                      </div>

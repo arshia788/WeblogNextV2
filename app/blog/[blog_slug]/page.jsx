@@ -3,7 +3,16 @@ import BlogFollowBtn from '@/components/blog-follow-btn/inedx';
 import Image from 'next/image';
 
 
-export default function SingleBlogPage({ params }) {
+const getData=async(input)=>{
+    const data= await fetch(`${process.env.SERVER_URL}/api/user/get-one-blog-by-slug/${input}`,{cache:'no-store'})
+    return data.json();
+}
+
+export default async function SingleBlogPage({ params }) {
+
+
+    const userData= await getData(params.blog_slug)
+    console.log(userData);
 
     const data= {
         image:'/images/ads/business_social_media_banner_19.jpg',
@@ -79,12 +88,18 @@ export default function SingleBlogPage({ params }) {
         <div>
 
             <section className='flex flex-col gap-14'>
+
                 <div className='flex flex-col gap-8 items-center mb-4'>
 
-                    <Image className='rounded-full border-4 border-blue-500' src={data.image} width={150} height={150} alt={data.title}/>
+                    <div className='relative w-[150px] h-[150px]'>
+                        <Image className='rounded-full border-4 border-blue-500' 
+                        src={userData.data.image} 
+                        fill
+                        alt={'al;sd;sad'}/>
+                    </div>
 
-                    <h3>{data.title}</h3>
-                    <p className='w-[600px] max-w-[600px]'>{data.short_desc}</p>
+                    <h1>{userData.data.blog_name}</h1>
+                    <p className='w-[600px] max-w-[600px] text-center'>{userData.data.details}</p>
 
                     <div className='flex justify-center items-center gap-8'>
                         <div> دنبال میشود{data.followes_number}</div>

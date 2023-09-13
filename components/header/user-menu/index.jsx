@@ -7,19 +7,21 @@ import Cookies from 'js-cookie';
 import {IoMdClose} from 'react-icons/io';
 
 // redux---
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // redux-actions---
 import { setuserImageValue } from '@/store/slices/userImageSlice';
 import { userIsActivetoFalse } from '@/store/slices/user-is-active';
 import { loggedtoFalse } from '@/store/slices/logedSlice';
 import { setRoleValue } from '@/store/slices/roleSlice';
+import { setusernameSlice } from '@/store/slices/usernameSlice';
 
 
 export default function UserMenu({ menuIsOpen, setMenuIsOpen }) {
 
     const [logoutManager,setLogoutManager]= useState(false);
     const dispatch= useDispatch();
+    const userblog_slug= useSelector(store=> store.usernameSlice.value);
     const router= useRouter();
 
     useEffect(()=>{
@@ -31,16 +33,17 @@ export default function UserMenu({ menuIsOpen, setMenuIsOpen }) {
     return (
         <div className={
             menuIsOpen ? 
-            'w-[320px] h-[100vh] backdrop-blur-sm bg-[#000000cc] fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center transition-all duration-300'
+            'w-[320px] h-[100vh] bg-[#292929] fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center transition-all duration-300'
             
             :
-            'w-[320px] h-[100vh] backdrop-blur-sm bg-[#000000cc] fixed top-0 bottom-0 -left-[320px] -right-[100%] flex justify-center items-center transition-all duration-300'            
+            'w-[320px] h-[100vh] bg-[#292929] fixed top-0 bottom-0 -left-[320px] -right-[100%] flex justify-center items-center transition-all duration-300'            
         }
         >
         
 
 
-            <div className='flex flex-col gap-4 p-4'>
+            <div className='flex flex-col gap-2 p-4'>
+                <LinkItem setMenuIsOpen={setMenuIsOpen} title="وبلاگ من" link={`/blog/${userblog_slug}`} />
                 <LinkItem setMenuIsOpen={setMenuIsOpen} title="تنظیمات" link="/setting" />
                 <LinkItem setMenuIsOpen={setMenuIsOpen} title="پیام ها" link="/notifications" />
                 <LinkItem setMenuIsOpen={setMenuIsOpen} title="فالوورها" link="/follow/followers" />
@@ -62,12 +65,13 @@ export default function UserMenu({ menuIsOpen, setMenuIsOpen }) {
 
                     // ! chon dari logout mikoni pas bayad in redux ro daobareh dorost bokoni. 
                     setLogoutManager(logoutManager)
-
+                    setMenuIsOpen(true)
                     dispatch(setuserImageValue('https://secure.gravatar.com/avatar/username?s=60&d=identicon'))
 
                     dispatch(userIsActivetoFalse());
                     dispatch(setRoleValue(4));
                     dispatch(loggedtoFalse());
+                    dispatch(setusernameSlice(''))
                 }}
 
                 className='w-[255px] text-center text-white transition-all duration-300 hover:bg-blue-600 bg-blue-600 py-2 rounded-md'>خروج</button>

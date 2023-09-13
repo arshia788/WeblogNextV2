@@ -26,7 +26,6 @@ const Setting = async () => {
 
    return (
       <div>
-         <div>setting</div>
          <UpdateUserData token={token}/>
       </div>
    );

@@ -8,6 +8,7 @@ import { logedToTrue } from '@/store/slices/logedSlice';
 import { setuserImageValue } from '@/store/slices/userImageSlice';
 import { useRouter } from 'next/navigation';
 import { useEffect,useState } from 'react';
+import { setusernameSlice } from '@/store/slices/usernameSlice';
 
 
 const SignUpComponent = () => {
@@ -62,6 +63,7 @@ const SignUpComponent = () => {
          dispatch(setRoleValue(3));
          dispatch(setuserImageValue(data.data.data.user_image));
          setuserBlogSlug(data.data.data.blog_slug);
+         dispatch(setusernameSlice(data.data.data.blog_slug))
 
       })
       .catch((error)=>{

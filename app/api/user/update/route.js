@@ -27,9 +27,12 @@ export async function POST(req) {
          if (inputData.username.length < 8 || inputData.username.length > 20) {
             return NextResponse.json({ data: "نام کاربری باید بین 8 تا 20 کارکتر باشد... ", }, { status: 402 });
          }
-         const usernameFound = await User.findOne({ username: inputData.username });
+
+         // chon mabna in hast ke space besheh dash(-) baray hamin in ro avordi biron va bererh find bokoneh agar ok bod bia anjam bedeh.
+         const newUsername = inputData.username.replace(/\s+/g, '-').toLowerCase();
+         const usernameFound = await User.findOne({ username: newUsername });
+
          if(!usernameFound || usernameFound._id == user_id){
-            const newUsername = inputData.username.replace(/\s+/g, '-').toLowerCase();
             newData.username=newUsername;
          }
          else{

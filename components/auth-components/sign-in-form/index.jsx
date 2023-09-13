@@ -12,6 +12,7 @@ import { userIsActivetoFalse } from '@/store/slices/user-is-active';
 import { userIsActivetoTrue } from '@/store/slices/user-is-active';
 
 import { setuserImageValue } from '@/store/slices/userImageSlice';
+import { setusernameSlice } from '@/store/slices/usernameSlice';
 
 
 const SignInComponent = () => {
@@ -75,6 +76,7 @@ const SignInComponent = () => {
          }
 
          dispatch(setuserImageValue(data.data.data.user_image));
+         dispatch(setusernameSlice(data.data.data.blog_slug))
          setuserBlogSlug(data.data.data.blog_slug);
 
       })

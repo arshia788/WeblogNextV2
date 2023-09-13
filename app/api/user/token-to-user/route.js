@@ -24,6 +24,7 @@ export async function GET(req){
          user_image:userFullData.image!=""
          ?userFullData.image
          :userFullData.default_image,
+         blog_slug:userFullData.blog_name
       };
 
       return NextResponse.json({data:send_data},{status:200});
